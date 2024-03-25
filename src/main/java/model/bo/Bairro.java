@@ -10,12 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+
 
 /**
  *
  * @author Thiago
  */
+@Entity
 public class Bairro {
     
     @Id
