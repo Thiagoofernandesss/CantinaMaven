@@ -14,13 +14,15 @@ import model.bo.Bairro;
  */
 public class BairroService {
     public static void adicionar(Bairro objeto) {
-        BairroDao BairroDao = new BairroDao();
-        BairroDao.create(objeto);
+        BairroDao.getInstance().create(objeto);
+        //BairroDao BairroDao = new BairroDao();
+        //BairroDao.create(objeto);
     }
 
     public static List<Bairro> carregar() {
-        BairroDao BairroDao = new BairroDao();
-        return BairroDao.retrieve();
+        return BairroDao.getInstance().retrieve();
+        //BairroDao BairroDao = new BairroDao();
+        //return BairroDao.retrieve();
     }
 
     public static Bairro carregar(int parPK) {

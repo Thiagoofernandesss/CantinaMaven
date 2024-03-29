@@ -10,7 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import model.bo.Bairro;
+import sun.security.jca.GetInstance;
 
 /**
  *
@@ -18,133 +22,80 @@ import model.bo.Bairro;
  */
 public class BairroDao implements InterfaceDao<Bairro> {
 
+    private static BairroDao instance;
+    protected EntityManager entityManager;
+
+    public static BairroDao getInstance() {
+        if (instance == null) {
+            instance = new BairroDao();
+        }
+        return instance;
+    }
+
+    public BairroDao() {
+        entityManager = getEntityManager();
+    }
+
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_Cantina");
+
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+
+        return entityManager;
+    }
+
     @Override
     public void create(Bairro objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "INSERT INTO cantinaifsc.bairro(descricao) VALUES (?)";
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.execute();
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            entityManager.getTransaction().rollback();
         }
     }
 
     @Override
     public List<Bairro> retrieve() {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "Select bairro.id, bairro.descricao from bairro";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Bairro> listaBairro = new ArrayList<Bairro>();
+        List<Bairro> listaBairros;
+        listaBairros = entityManager.createQuery("select b From Bairro b", Bairro.class).getResultList();
+        return listaBairros;
 
-        try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                Bairro bairro = new Bairro();
-                bairro.setId(rst.getInt("id"));
-                bairro.setDescricao(rst.getString("descricao"));
-                listaBairro.add(bairro);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaBairro;
-        }
     }
 
     @Override
     public Bairro retrieve(int parPK) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "Select bairro.id, bairro.descricao from bairro where id= ?";
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Bairro bairroParPK = new Bairro();
-
-        try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-
-            pstm.setInt(1, parPK);
-            
-
-            rst = pstm.executeQuery();
-
-            if (rst.next()) {
-                bairroParPK.setId(rst.getInt("id"));
-                bairroParPK.setDescricao(rst.getString("descricao"));
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return bairroParPK;
-        }
+        return entityManager.find(Bairro.class, parPK);
     }
-    
+
     @Override
     public List<Bairro> retrieve(String parString) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "Select bairro.id, bairro.descricao from bairro where descricao like ?";
-        
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Bairro> listaBairro = new ArrayList<>();
 
-        try {
-            pstm = conexao.prepareStatement(sqlExecutar);
+        List<Bairro> listaBairros;
+        listaBairros = entityManager.createQuery("select b From Bairro b where "
+                + "b.descricao like :parDescricao", Bairro.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
+        return listaBairros;
 
-            pstm.setString(1, "%" + parString + "%");
-
-            rst = pstm.executeQuery();
-
-            while(rst.next()){
-                Bairro bairro = new Bairro();
-                bairro.setId(rst.getInt("id"));
-                bairro.setDescricao(rst.getString("descricao"));
-                listaBairro.add(bairro);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaBairro;
-        }
     }
-
-
-
 
     @Override
     public void update(Bairro objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "update bairro set bairro.descricao = ? where bairro.id = ?";
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setInt(2, objeto.getId());
-            pstm.execute();
-        } catch (SQLException ex) {
+            Bairro bairro = entityManager.find(Bairro.class, objeto);   
+            entityManager.getTransaction().begin();
+            entityManager.merge(bairro);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            entityManager.getTransaction().rollback();
         }
     }
 
     @Override
     public void delete(Bairro objeto) {
     }
-
-
 
 }
