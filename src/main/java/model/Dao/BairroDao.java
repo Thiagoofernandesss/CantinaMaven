@@ -62,7 +62,7 @@ public class BairroDao implements InterfaceDao<Bairro> {
     public List<Bairro> retrieve() {
         List<Bairro> listaBairros;
         listaBairros = entityManager.createQuery("select b From Bairro b", Bairro.class).getResultList();
-        return listaBairros;
+        return listaBairros;    
 
     }
 

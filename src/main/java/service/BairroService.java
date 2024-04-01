@@ -26,22 +26,26 @@ public class BairroService {
     }
 
     public static Bairro carregar(int parPK) {
-        BairroDao BairroDao = new BairroDao();
-        return BairroDao.retrieve(parPK);
+        //BairroDao BairroDao = new BairroDao();
+        //return BairroDao.retrieve(parPK);
+        return BairroDao.getInstance().retrieve(parPK);
     }
 
     public static List<Bairro> carregar(String parString) {
-        BairroDao BairroDao = new BairroDao();
-        return BairroDao.retrieve(parString);
+        //BairroDao BairroDao = new BairroDao();
+        //return BairroDao.retrieve(parString);
+        return BairroDao.getInstance().retrieve(parString);
     }
 
     public static void atualizar(Bairro objeto) {
-        BairroDao BairroDao = new BairroDao();
-        BairroDao.update(objeto);
+        //BairroDao BairroDao = new BairroDao();
+        //BairroDao.update(objeto);
+        BairroDao.getInstance().update(objeto);
     }
     public static void remover(Bairro objeto) {
-        BairroDao BairroDao = new BairroDao();
-        BairroDao.delete(objeto);
+        //BairroDao BairroDao = new BairroDao();
+        //BairroDao.delete(objeto);
+        BairroDao.getInstance().delete(objeto);
     }
     
 }
