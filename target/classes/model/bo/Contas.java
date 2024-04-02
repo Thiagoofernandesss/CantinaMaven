@@ -4,28 +4,69 @@
  */
 package model.bo;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+
+@Entity
 
 /**
  *
  * @author Thiago
  */
-public class Contas {
+public class Contas implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
     private DateTimeFormatter dataHoraEmissao;
+    
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataVencimento;
+    
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataQuitação;
+    
+    @Column
     private float valorEmitido;
+    
+    @Column
     private float valorDesconto;
+    
+    @Column
     private float valorAcrescimo;
+    
+    @Column
     private float valorQuitado;
+    
+    @Column
     private float observacao;
+    
+    @Column
     private char flagTipoConta;
+    
+    @Column
     private char status;
-
+    
+    @JoinColumn
+    @ManyToOne
     private Venda venda;
+    
+    @JoinColumn
+    @ManyToOne
     private Compra compra;
 
     public Contas() {

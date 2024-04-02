@@ -4,6 +4,7 @@
  */
 package model.bo;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import javax.persistence.Id;
  * @author Thiago
  */
 @Entity
-public class Bairro {
+public class Bairro implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

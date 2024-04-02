@@ -4,15 +4,28 @@
  */
 package model.bo;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
+
 /**
  *
  * @author Thiago
  */
-public class Cliente extends Pessoa {
-
+public class Cliente extends Pessoa implements Serializable {
+    
+    @Column
     private String cpf;
+    
+    @Column
     private String rg;
+    
+    @Column
     private String matricula;
+    
+    @Column
     private String dataNascimento;
 
     public Cliente() {

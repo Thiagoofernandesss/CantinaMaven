@@ -4,22 +4,50 @@
  */
 package model.bo;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+
+@Entity
 
 /**
  *
  * @author Thiago
  */
-public class Compra {
+public class Compra implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
     private int numeroNF;
+    
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
     private DateTimeFormatter dataHoraCompra;
+    
+    @Column
     private float valorDesconto;
+    
+    @Column
     private char flagTipoDesconto;
+    
+    @Column
     private char status;
+    
+    @Column
     private String observacao;
     
+    @JoinColumn
+    @ManyToOne
     private Fornecedor fornecedor;
 
     public Compra() {

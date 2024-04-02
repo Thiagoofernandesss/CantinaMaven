@@ -4,22 +4,51 @@
  */
 package model.bo;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+
+@Entity
 
 /**
  *
  * @author Thiago
  */
-public class Caixa {
+public class Caixa implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
     private String dataHoraAbertura;
+    
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
     private String dataHoraFechamento;
+    
+    @Column
     private float valorAbertura;
+    
+    @Column
     private float valorFechamento;
+    
+    @Column
     private String observacao;
+    
+    @Column
     private char status;
     
+    @JoinColumn
+    @ManyToOne
     private Funcionario funcionario;
 
     public Caixa() {

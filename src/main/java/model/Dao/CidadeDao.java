@@ -66,46 +66,19 @@ public class CidadeDao implements InterfaceDao<Cidade> {
 
     
     public List<Cidade> retrieve(String nomeParametro, String parString) {
-        /*
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = " SELECT cidade.id, "
-                + " cidade.descricao, "
-                + " cidade.uf "
-                + " FROM cidade "
-                + " WHERE " + nomeParametro + " like ?";
-
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Cidade> listaCidade = new ArrayList<>();
-
-        try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, "%" + parString + "%");
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                Cidade cidade = new Cidade();
-                cidade.setId(rst.getInt("id"));
-                cidade.setDescricao(rst.getString("descricao"));
-                cidade.setUf(rst.getString("uf"));
-                listaCidade.add(cidade);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaCidade;
-        }
-        */
-        return null;
+        List<Cidade> listaCidades;
+        listaCidades = entityManager.createQuery("Select c From Cidade c Where " + nomeParametro + "  like "
+                + ":parDescricao", Cidade.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
+        return listaCidades;   
     }
     
 
     @Override
     public void update(Cidade objeto) {
         try {
-            Cidade cidade = entityManager.find(Cidade.class, objeto);
+            Cidade cidade = entityManager.find(Cidade.class, objeto.getId());
             entityManager.getTransaction().begin();
-            entityManager.merge(cidade);
+            entityManager.merge(objeto);
             entityManager.getTransaction().commit();
             
         } catch (Exception ex) {
@@ -117,7 +90,16 @@ public class CidadeDao implements InterfaceDao<Cidade> {
 
     @Override
     public void delete(Cidade objeto) {
-        // Implement the delete method if needed
+        try {
+            Cidade cidade = entityManager.find(Cidade.class, objeto.getId());
+            entityManager.getTransaction().begin();
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 
     @Override

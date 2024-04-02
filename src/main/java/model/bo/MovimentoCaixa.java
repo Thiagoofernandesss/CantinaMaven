@@ -4,6 +4,7 @@
  */
 package model.bo;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import javax.persistence.Temporal;
  *
  * @author Thiago
  */
-public class MovimentoCaixa {
+public class MovimentoCaixa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

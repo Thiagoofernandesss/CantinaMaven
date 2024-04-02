@@ -14,32 +14,38 @@ import model.bo.Bairro;
  */
 public class BairroService {
     public static void adicionar(Bairro objeto) {
-        BairroDao BairroDao = new BairroDao();
-        BairroDao.create(objeto);
+        BairroDao.getInstance().create(objeto);
+        //BairroDao BairroDao = new BairroDao();
+        //BairroDao.create(objeto);
     }
 
     public static List<Bairro> carregar() {
-        BairroDao BairroDao = new BairroDao();
-        return BairroDao.retrieve();
+        return BairroDao.getInstance().retrieve();
+        //BairroDao BairroDao = new BairroDao();
+        //return BairroDao.retrieve();
     }
 
     public static Bairro carregar(int parPK) {
-        BairroDao BairroDao = new BairroDao();
-        return BairroDao.retrieve(parPK);
+        //BairroDao BairroDao = new BairroDao();
+        //return BairroDao.retrieve(parPK);
+        return BairroDao.getInstance().retrieve(parPK);
     }
 
     public static List<Bairro> carregar(String parString) {
-        BairroDao BairroDao = new BairroDao();
-        return BairroDao.retrieve(parString);
+        //BairroDao BairroDao = new BairroDao();
+        //return BairroDao.retrieve(parString);
+        return BairroDao.getInstance().retrieve(parString);
     }
 
     public static void atualizar(Bairro objeto) {
-        BairroDao BairroDao = new BairroDao();
-        BairroDao.update(objeto);
+        //BairroDao BairroDao = new BairroDao();
+        //BairroDao.update(objeto);
+        BairroDao.getInstance().update(objeto);
     }
     public static void remover(Bairro objeto) {
-        BairroDao BairroDao = new BairroDao();
-        BairroDao.delete(objeto);
+        //BairroDao BairroDao = new BairroDao();
+        //BairroDao.delete(objeto);
+        BairroDao.getInstance().delete(objeto);
     }
     
 }

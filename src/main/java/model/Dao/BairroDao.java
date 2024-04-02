@@ -84,9 +84,9 @@ public class BairroDao implements InterfaceDao<Bairro> {
     @Override
     public void update(Bairro objeto) {
         try {
-            Bairro bairro = entityManager.find(Bairro.class, objeto);   
+            Bairro bairro = entityManager.find(Bairro.class, objeto.getId());   
             entityManager.getTransaction().begin();
-            entityManager.merge(bairro);
+            entityManager.merge(objeto);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -96,6 +96,15 @@ public class BairroDao implements InterfaceDao<Bairro> {
 
     @Override
     public void delete(Bairro objeto) {
+        try {
+            Bairro bairro = entityManager.find(Bairro.class, objeto.getId());   
+            entityManager.getTransaction().begin();
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 
 }

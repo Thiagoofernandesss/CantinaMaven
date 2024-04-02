@@ -1,0 +1,22 @@
+package model.bo;
+
+import java.time.format.DateTimeFormatter;
+import javax.annotation.Generated;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+import model.bo.Fornecedor;
+
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-01T19:51:43")
+@StaticMetamodel(Compra.class)
+public class Compra_ { 
+
+    public static volatile SingularAttribute<Compra, String> observacao;
+    public static volatile SingularAttribute<Compra, Float> valorDesconto;
+    public static volatile SingularAttribute<Compra, Character> flagTipoDesconto;
+    public static volatile SingularAttribute<Compra, DateTimeFormatter> dataHoraCompra;
+    public static volatile SingularAttribute<Compra, Integer> id;
+    public static volatile SingularAttribute<Compra, Integer> numeroNF;
+    public static volatile SingularAttribute<Compra, Fornecedor> fornecedor;
+    public static volatile SingularAttribute<Compra, Character> status;
+
+}

@@ -80,54 +80,18 @@ public class CarteirinhaDao implements InterfaceDao<Carteirinha>{
     }
   
     public List<Carteirinha> retrieve(String nomeParametro, String parString) {
-        /*
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "select cart.*, b.* from carteirinha cart " +
-        "left outer join cliente b on cart.cliente_id = b.id where cart." + nomeParametro + " like ?";
-        
-        PreparedStatement pstm = null;
-        ResultSet rst = null;      
-        List<Carteirinha> listaCarteirinha = new ArrayList<>();
-        
-        try {
-            
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1,"%"+ parString +"%");
-            rst = pstm.executeQuery();
-            
-            while (rst.next()) {                
-                Carteirinha carteirinha = new Carteirinha();
-                
-                carteirinha.setId(rst.getInt("cart.id"));
-                carteirinha.setCodigoBarra(rst.getString("cart.codigoBarra"));
-                carteirinha.setDataGeracao(rst.getString("cart.dataGeracao"));
-                carteirinha.setDataCancelamento(rst.getString("cart.dataCancelamento"));
-                
-                Cliente cliente = new Cliente();
-                cliente.setId(rst.getInt("b.id"));
-                cliente.setNome(rst.getString("b.nome"));
-                cliente.setCpf(rst.getString("b.cpf"));
-                
-                carteirinha.setCliente(cliente);
-                
-                listaCarteirinha.add(carteirinha);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaCarteirinha;
-        }
-        */
-        return null;
+        List<Carteirinha> listaCarteirinhas;
+        listaCarteirinhas = entityManager.createQuery("Select c From Carteirinha c Where " + nomeParametro + "  like "
+                + ":parDescricao", Carteirinha.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
+        return listaCarteirinhas;
     }
 
     @Override
     public void update(Carteirinha objeto) {
         try {
-            Carteirinha carteirinha = entityManager.find(Carteirinha.class, objeto);
+            Carteirinha carteirinha = entityManager.find(Carteirinha.class, objeto.getId());
             entityManager.getTransaction().begin();
-            entityManager.merge(carteirinha);
+            entityManager.merge(objeto);
             entityManager.getTransaction().commit();
             
         } catch (Exception ex) {
@@ -138,6 +102,16 @@ public class CarteirinhaDao implements InterfaceDao<Carteirinha>{
 
     @Override
     public void delete(Carteirinha objeto) {
+        try {
+            Carteirinha carteirinha = entityManager.find(Carteirinha.class, objeto.getId());
+            entityManager.getTransaction().begin();
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
 
     }
     

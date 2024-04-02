@@ -13,143 +13,63 @@ import java.util.List;
 import model.bo.Bairro;
 import model.bo.Cidade;
 import model.bo.Endereco;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
  * @author Thiago
  */
 public class EnderecoDao implements InterfaceDao<Endereco> {
+    
+    private static EnderecoDao instance;
+    protected EntityManager entityManager;
+
+    public static EnderecoDao getInstance() {
+        if (instance == null) {
+            instance = new EnderecoDao();
+        }
+        return instance;
+    }
+
+    public EnderecoDao() {
+        entityManager = getEntityManager();
+    }
+
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu_Cantina");
+
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+
+        return entityManager;
+    }
 
     @Override
     public void create(Endereco objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "INSERT INTO cantinaifsc.endereco(cep,logradouro,cidade_id,bairro_id,status) VALUES(?,?,?,?,?)";
-        PreparedStatement pstm = null;
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, objeto.getCep());
-            pstm.setString(2, objeto.getLogradouro());
-            pstm.setInt(3, objeto.getCidade().getId());
-            pstm.setInt(4, objeto.getBairro().getId());
-            pstm.setString(5, objeto.getStatus() + "");
-            //concatenando com "" p/ transfformar em String
-            pstm.execute();
-        } catch (SQLException ex) {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+            
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            entityManager.getTransaction().rollback();
         }
     }
 
     @Override
     public List<Endereco> retrieve() {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "SELECT endereco.id, "
-                + "endereco.cep, "
-                + "endereco.logradouro, "
-                + "endereco.cidade_id, "
-                + "endereco.bairro_id, "
-                + "endereco.status, "
-                + "bairro.descricao , "
-                + "cidade.descricao , "
-                + "cidade.uf "
-                + "FROM endereco "
-                + " LEFT OUTER JOIN BAIRRO ON BAIRRO.id = ENDERECO.bairro_id "
-                + " LEFT OUTER JOIN CIDADE ON CIDADE.id = ENDERECO.Cidade_id ";
-        ;
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Endereco> listaEndereco = new ArrayList<>();
-
-        try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                Endereco endereco = new Endereco();
-
-                endereco.setId(rst.getInt("id"));
-                endereco.setLogradouro(rst.getString("logradouro"));
-                endereco.setStatus(rst.getString("status").charAt(0));
-                //Utilizei o String.CharAt(0) para transformar a 
-                //String de retorno em char
-                endereco.setCep(rst.getString("cep"));
-
-                Bairro bairro = new Bairro();
-                bairro.setId(rst.getInt("Bairro_id"));
-                bairro.setDescricao(rst.getString("bairro.descricao"));
-                endereco.setBairro(bairro);
-
-                Cidade cidade = new Cidade();
-                cidade.setId(rst.getInt("Cidade_id"));
-                cidade.setDescricao(rst.getString("cidade.descricao"));
-                cidade.setUf(rst.getString("uf"));
-
-                endereco.setCidade(cidade);
-
-                listaEndereco.add(endereco);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaEndereco;
-        }
+        List<Endereco> listaEnderecos;
+        listaEnderecos = entityManager.createQuery("select e from Endereco e",Endereco.class).getResultList();
+        return listaEnderecos;
     }
 
     @Override
     public Endereco retrieve(int parPK) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = "SELECT endereco.id, "
-                + "endereco.cep, "
-                + "endereco.logradouro, "
-                + "endereco.cidade_id, "
-                + "endereco.bairro_id, "
-                + "endereco.status, "
-                + "bairro.descricao , "
-                + "cidade.descricao , "
-                + "cidade.uf "
-                + "FROM endereco "
-                + " LEFT OUTER JOIN bairro ON bairro.id = endereco.bairro_id "
-                + " LEFT OUTER JOIN cidade ON cidade.id = endereco.cidade_id "
-                + " WHERE endereco.id = ? ";
-
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Endereco endereco = new Endereco();
-        //criei o objeto endereco fora do bloco protegido
-        //para que seu escopo permita carregá-lo como retorno do método
-
-        try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setInt(1, parPK);
-            rst = pstm.executeQuery();
-
-            while (rst.next()) {
-
-                endereco.setId(rst.getInt("id"));
-                endereco.setLogradouro(rst.getString("logradouro"));
-                endereco.setStatus(rst.getString("status").charAt(0));
-                //Utilizei o String.CharAt(0) para transformar a 
-                //String de retorno em char
-                endereco.setCep(rst.getString("cep"));
-
-                Bairro bairro = new Bairro();
-                bairro.setId(rst.getInt("Bairro_id"));
-                bairro.setDescricao(rst.getString("bairro.descricao"));
-                endereco.setBairro(bairro);
-
-                Cidade cidade = new Cidade();
-                cidade.setId(rst.getInt("Cidade_id"));
-                cidade.setDescricao(rst.getString("cidade.descricao"));
-                cidade.setUf(rst.getString("uf"));
-                endereco.setCidade(cidade);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return endereco;
-        }
+        return entityManager.find(Endereco.class, parPK);
     }
 
     @Override
@@ -158,6 +78,7 @@ public class EnderecoDao implements InterfaceDao<Endereco> {
     }
 
     public List<Endereco> retrieve(String nomeParametro, String parString) {
+        /*
         Connection conexao = ConnectionFactory.getConnection();
         String sqlExecutar = "SELECT endereco.id, "
                 + "endereco.cep, "
@@ -210,41 +131,27 @@ public class EnderecoDao implements InterfaceDao<Endereco> {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return listaEndereco;
         }
+        */
+        return null;
     }
     
     
 
     @Override
     public void update(Endereco objeto) {
-        Connection conexao = ConnectionFactory.getConnection();
-        String sqlExecutar = " UPDATE endereco"
-                + " SET "
-                + " endereco.cep = ?, "
-                + " endereco.logradouro = ?, "
-                + " endereco.cidade_id = ?, "
-                + " endereco.bairro_id = ?, "
-                + " endereco.status = ? "
-                + " WHERE endereco.id = ?";
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlExecutar);
-            pstm.setString(1, objeto.getCep());
-            pstm.setString(2, objeto.getLogradouro());
-            pstm.setInt(3, objeto.getCidade().getId());
-            pstm.setInt(4, objeto.getBairro().getId());
-            pstm.setString(5, objeto.getStatus() + "");
-            pstm.setInt(6, objeto.getId());
-            pstm.execute();
-
-        } catch (SQLException ex) {
+            Endereco endereco = entityManager.find(Endereco.class, objeto.getId());
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+            
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            entityManager.getTransaction().rollback();
         }
     }
     
-    
+    /*
     public Endereco retrieveCEP(String parPK) {
         Connection conexao = ConnectionFactory.getConnection();
         String sqlExecutar = "SELECT endereco.id, "
@@ -299,10 +206,20 @@ public class EnderecoDao implements InterfaceDao<Endereco> {
             return endereco;
         }
     }
+    */
 
     @Override
     public void delete(Endereco objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Endereco endereco = entityManager.find(Endereco.class, objeto.getId());
+            entityManager.getTransaction().begin();
+            entityManager.remove(objeto);
+            entityManager.getTransaction().commit();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 
 }

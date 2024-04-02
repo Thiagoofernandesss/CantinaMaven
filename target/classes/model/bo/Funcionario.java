@@ -4,6 +4,12 @@
  */
 package model.bo;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
+
 /**
  *
  * @author Thiago
@@ -13,11 +19,18 @@ package model.bo;
  * 
  * 
  */
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements Serializable {
 
+    @Column
     private String cpf;
+    
+    @Column
     private String rg;
+    
+    @Column
     private String usuario;
+    
+    @Column
     private String senha;
 
     public Funcionario() {

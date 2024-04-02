@@ -4,18 +4,42 @@
  */
 package model.bo;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+
 /**
  *
  * @author Thiago
  */
-public class ItemCompra {
-
+public class ItemCompra implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
     private float qtdProduto;
+    
+    @Column
     private float valorUnitario;
+    
+    @Column
     private char status;
 
+    @JoinColumn
+    @ManyToOne
     private Produto produto;
+    
+    @JoinColumn
+    @ManyToOne
     private Compra compra;
 
     public ItemCompra() {

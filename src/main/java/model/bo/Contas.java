@@ -4,6 +4,7 @@
  */
 package model.bo;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,7 +22,7 @@ import javax.persistence.Temporal;
  *
  * @author Thiago
  */
-public class Contas {
+public class Contas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,24 +4,59 @@
  */
 package model.bo;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+
+@Entity
 
 /**
  *
  * @author Thiago
  */
-public class MovimentacaoEstoque {
-
+public class MovimentacaoEstoque implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
     private DateTimeFormatter dataHoraMovimento;
+    
+    @Column
     private char flagTipoMovimento;
+    
+    @Column
     private float qtdMovimentada;
+    
+    @Column
     private String observacaoMovimento;
+    
+    @Column
     private char status;
     
+    @JoinColumn
+    @ManyToOne
     private ItemVenda itemVenda;
+    
+    @JoinColumn
+    @ManyToOne
     private ItemCompra itemCompra;
+    
+    @JoinColumn
+    @ManyToOne
     private Produto produto;
+    
+    @JoinColumn
+    @ManyToOne
     private Funcionario funcionario;
     
     

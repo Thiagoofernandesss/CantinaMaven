@@ -4,20 +4,41 @@
  */
 package model.bo;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+
 /**
  *
  * @author Thiago
  */
 public abstract class Pessoa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
     private String nome;
+    @Column
     private String fone1;
+    @Column
     private String fone2;
+    @Column
     private String email;
+    @Column
     private char status;
+    @Column
     private String complementoEndereco;
     
+    @JoinColumn
+    @ManyToOne
     private Endereco endereco;
     
     
