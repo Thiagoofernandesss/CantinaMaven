@@ -254,7 +254,7 @@ public class ControllerCadastroFornecedor implements ActionListener, FocusListen
                 this.cadastroFornecedor.getjTextFieldBairro().setText("");
                 this.cadastroFornecedor.getjTextFieldLogradouro().setText("");
             } else {
-                Endereco endereco = EnderecoService.carregarCEP(codigoCEP);
+                Endereco endereco = EnderecoService.carregar(cep, codigoCEP);
 
                 if (endereco != null) {
                     this.cadastroFornecedor.getjTextFieldCidade().setText(endereco.getCidade().getDescricao());
