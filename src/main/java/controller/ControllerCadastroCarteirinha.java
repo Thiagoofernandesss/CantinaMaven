@@ -103,7 +103,7 @@ public class ControllerCadastroCarteirinha implements ActionListener, FocusListe
                 // Lida com erros de formatação da data, se necessário
             }
 
-            Cliente cliente = ClienteService.carregarCPF(this.cadastroCarteirinha.getjFormattedTextFieldCPF().getText());
+            Cliente cliente = ClienteService.carregar("cpf",this.cadastroCarteirinha.getjFormattedTextFieldCPF().getText()).get(0);
 
             carteirinha.setCliente(cliente);
 

@@ -234,11 +234,11 @@ public class ControllerPDV implements ActionListener, FocusListener {
 
             String codigodebarras = this.pontoVenda.getjTextFieldFiltrarProduto().getText().substring(parametroQuantidade + 1);
 
-            produtoAtual = service.ProdutoService.carregarCodigoBarra(codigodebarras);
+            produtoAtual = service.ProdutoService.carregar("",codigodebarras).get(0);
 
         } else {
             String codigodebarras = this.pontoVenda.getjTextFieldFiltrarProduto().getText();
-            produtoAtual = service.ProdutoService.carregarCodigoBarra(codigodebarras);
+            produtoAtual = service.ProdutoService.carregar("", codigodebarras).get(0);
         }
 
         return produtoAtual;

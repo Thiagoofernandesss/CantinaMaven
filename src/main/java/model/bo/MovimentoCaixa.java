@@ -5,6 +5,7 @@
 package model.bo;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,10 +28,10 @@ public class MovimentoCaixa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private DateTimeFormatter dataHorarioMovimento;
-    
+    /*@Column
+    //@Temporal(javax.persistence.TemporalType.DATE)
+    private LocalDateTime dataHorarioMovimento;
+    */
     @Column
     private float valorMovimento;
     
@@ -56,7 +57,7 @@ public class MovimentoCaixa implements Serializable {
 
     public MovimentoCaixa(int id, DateTimeFormatter dataHorarioMovimento, float valorMovimento, String observacao, char flagTipoMovimento, char status, Contas contas, Caixa caixa) {
         this.id = id;
-        this.dataHorarioMovimento = dataHorarioMovimento;
+        //this.dataHorarioMovimento = dataHorarioMovimento;
         this.valorMovimento = valorMovimento;
         this.observacao = observacao;
         this.flagTipoMovimento = flagTipoMovimento;
@@ -85,9 +86,9 @@ public class MovimentoCaixa implements Serializable {
         return id;
     }
 
-    public DateTimeFormatter getDataHorarioMovimento() {
+  /*  public DateTimeFormatter getDataHorarioMovimento() {
         return dataHorarioMovimento;
-    }
+    }*/
 
     public float getValorMovimento() {
         return valorMovimento;
@@ -108,10 +109,10 @@ public class MovimentoCaixa implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
+/*
     public void setDataHorarioMovimento(DateTimeFormatter dataHorarioMovimento) {
         this.dataHorarioMovimento = dataHorarioMovimento;
-    }
+    }*/
 
     public void setValorMovimento(float valorMovimento) {
         this.valorMovimento = valorMovimento;
@@ -132,7 +133,7 @@ public class MovimentoCaixa implements Serializable {
     @Override
     public String toString() {
         return this.getId() + ", "
-                + this.getDataHorarioMovimento() + ", "
+                //+ this.getDataHorarioMovimento() + ", "
                 + this.getValorMovimento() + ", "
                 + this.getObservacao() + ", "
                 + this.getFlagTipoMovimento() + ", "

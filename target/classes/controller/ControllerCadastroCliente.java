@@ -186,7 +186,7 @@ public class ControllerCadastroCliente implements ActionListener, FocusListener 
                 // Lida com erros de formatação da data, se necessário
             }
 
-            Endereco endereco = EnderecoService.carregarCEP(this.cadastroCliente.getjFormattedTextFieldCEP().getText());
+            Endereco endereco = EnderecoService.carregar("cep",this.cadastroCliente.getjFormattedTextFieldCEP().getText()).get(0);
             
             cliente.setEndereco(endereco);
 
@@ -335,7 +335,7 @@ public class ControllerCadastroCliente implements ActionListener, FocusListener 
                 this.cadastroCliente.getjTextFieldBairro().setText("");
                 this.cadastroCliente.getjTextFieldLogradouro().setText("");
             } else {
-                Endereco endereco = EnderecoService.carregarCEP(codigoCEP);
+                Endereco endereco = EnderecoService.carregar("cep",codigoCEP).get(0);
 
                 if (endereco != null) {
                     this.cadastroCliente.getjTextFieldCidade().setText(endereco.getCidade().getDescricao());

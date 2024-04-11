@@ -1,18 +1,16 @@
 package model.bo;
 
-import java.time.format.DateTimeFormatter;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import model.bo.Caixa;
 import model.bo.Contas;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-08T17:11:05")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-11T18:51:38")
 @StaticMetamodel(MovimentoCaixa.class)
 public class MovimentoCaixa_ { 
 
     public static volatile SingularAttribute<MovimentoCaixa, Character> flagTipoMovimento;
-    public static volatile SingularAttribute<MovimentoCaixa, DateTimeFormatter> dataHorarioMovimento;
     public static volatile SingularAttribute<MovimentoCaixa, String> observacao;
     public static volatile SingularAttribute<MovimentoCaixa, Caixa> caixa;
     public static volatile SingularAttribute<MovimentoCaixa, Integer> id;

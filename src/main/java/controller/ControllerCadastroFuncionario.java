@@ -89,7 +89,7 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
             funcionario.setUsuario(this.cadastroFuncionario.getjTextFieldUsuario().getText());
             funcionario.setSenha(this.cadastroFuncionario.getjPasswordFieldSenhaUsuario().getText());
             
-            Endereco endereco = EnderecoService.carregarCEP(this.cadastroFuncionario.getjFormattedTextFieldCEP().getText());
+            Endereco endereco = EnderecoService.carregar("cep",this.cadastroFuncionario.getjFormattedTextFieldCEP().getText()).get(0);
             
             funcionario.setEndereco(endereco);
             
@@ -209,7 +209,7 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
                 this.cadastroFuncionario.getjTextFieldBairro().setText("");
                 this.cadastroFuncionario.getjTextFieldLogradouro().setText("");
             } else {
-                Endereco endereco = EnderecoService.carregarCEP(codigoCEP);
+                Endereco endereco = EnderecoService.carregar("cep",codigoCEP).get(0);
 
                 if (endereco != null) {
                     this.cadastroFuncionario.getjTextFieldCidade().setText(endereco.getCidade().getDescricao());

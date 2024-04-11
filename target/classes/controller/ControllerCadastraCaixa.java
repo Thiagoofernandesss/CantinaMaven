@@ -97,7 +97,7 @@ public class ControllerCadastraCaixa implements ActionListener{
                 // Lida com erros de formatação da data, se necessário
             }
             
-            Funcionario funcionario = FuncionarioService.carregarFuncionario(this.cadastroCaixa.getjTextFieldFiltrarFuncionario().getText());
+            Funcionario funcionario = FuncionarioService.carregar("",this.cadastroCaixa.getjTextFieldFiltrarFuncionario().getText()).get(0);
 
             caixa.setFuncionario(funcionario);
 
