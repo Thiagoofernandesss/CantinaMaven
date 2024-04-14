@@ -166,7 +166,7 @@ public class ControllerCadastroCliente implements ActionListener, FocusListener 
             cliente.setFone2(this.cadastroCliente.getjFormattedTextFieldFone2().getText());
             cliente.setEmail(this.cadastroCliente.getjTextFieldEmail().getText());
             cliente.setStatus(this.cadastroCliente.getjCheckBoxStatus().isSelected());
-            cliente.setCpf(this.cadastroCliente.getjFormattedTextFieldCPF().getText());
+            cliente.setCpf(this.cadastroCliente.getjFormattedTextFieldCPF().getText().replace(" ", ""));
             String cpfString = this.cadastroCliente.getjFormattedTextFieldCPF().getText();
             cliente.setRg(this.cadastroCliente.getjFormattedTextFieldRg().getText());
             cliente.setMatricula(this.cadastroCliente.getjTextFieldMatricula().getText());

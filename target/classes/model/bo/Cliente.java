@@ -8,12 +8,13 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity
+
 
 /**
  *
  * @author Thiago
  */
+@Entity
 public class Cliente extends Pessoa implements Serializable {
     
     @Column

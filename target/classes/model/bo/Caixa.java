@@ -6,6 +6,7 @@ package model.bo;
 
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,12 +29,12 @@ public class Caixa implements Serializable {
     private int id;
     
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private String dataHoraAbertura;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataHoraAbertura;
     
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private String dataHoraFechamento;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataHoraFechamento;
     
     @Column
     private float valorAbertura;
@@ -54,7 +55,7 @@ public class Caixa implements Serializable {
     public Caixa() {
     }
 
-    public Caixa(int id, String dataHoraAbertura, String dataHoraFechamento, float valorAbertura, float valorFechamento, String observaccao, char status, Funcionario funcionario) {
+    public Caixa(int id, Date dataHoraAbertura, Date dataHoraFechamento, float valorAbertura, float valorFechamento, String observaccao, char status, Funcionario funcionario) {
         this.id = id;
         this.dataHoraAbertura = dataHoraAbertura;
         this.dataHoraFechamento = dataHoraFechamento;
@@ -65,11 +66,11 @@ public class Caixa implements Serializable {
         this.funcionario = funcionario;
     }
 
-    public String getDataHoraAbertura() {
+    public Date getDataHoraAbertura() {
         return dataHoraAbertura;
     }
 
-    public void setDataHoraAbertura(String dataHoraAbertura) {
+    public void setDataHoraAbertura(Date dataHoraAbertura) {
         this.dataHoraAbertura = dataHoraAbertura;
     }
 
@@ -88,7 +89,7 @@ public class Caixa implements Serializable {
     }
 
 
-    public String getDataHoraFechamento() {
+    public Date getDataHoraFechamento() {
         return dataHoraFechamento;
     }
 
@@ -112,7 +113,7 @@ public class Caixa implements Serializable {
         this.id = id;
     }
 
-    public void setDataHoraFechamento(String dataHoraFechamento) {
+    public void setDataHoraFechamento(Date dataHoraFechamento) {
         this.dataHoraFechamento = dataHoraFechamento;
     }
 

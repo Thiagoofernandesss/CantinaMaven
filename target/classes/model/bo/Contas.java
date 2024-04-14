@@ -29,8 +29,8 @@ public class Contas implements Serializable {
     private int id;
     
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private DateTimeFormatter dataHoraEmissao;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataHoraEmissao;
     
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -72,7 +72,7 @@ public class Contas implements Serializable {
     public Contas() {
     }
 
-    public Contas(int id, DateTimeFormatter dataHoraEmissao, Date dataVencimento, Date dataQuitação, float valorEmitido, float valorDesconto, float valorAcrescimo, float valorQuitado, float observacao, char flagTipoConta, char status, Venda venda, Compra compra) {
+    public Contas(int id, Date dataHoraEmissao, Date dataVencimento, Date dataQuitação, float valorEmitido, float valorDesconto, float valorAcrescimo, float valorQuitado, float observacao, char flagTipoConta, char status, Venda venda, Compra compra) {
         this.id = id;
         this.dataHoraEmissao = dataHoraEmissao;
         this.dataVencimento = dataVencimento;
@@ -108,7 +108,7 @@ public class Contas implements Serializable {
         return id;
     }
 
-    public DateTimeFormatter getDataHoraEmissao() {
+    public Date getDataHoraEmissao() {
         return dataHoraEmissao;
     }
 
@@ -152,7 +152,7 @@ public class Contas implements Serializable {
         this.id = id;
     }
 
-    public void setDataHoraEmissao(DateTimeFormatter dataHoraEmissao) {
+    public void setDataHoraEmissao(Date dataHoraEmissao) {
         this.dataHoraEmissao = dataHoraEmissao;
     }
 

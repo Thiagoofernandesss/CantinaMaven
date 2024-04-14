@@ -61,7 +61,7 @@ public class ProdutoDao implements InterfaceDao<Produto> {
     @Override
     public List<Produto> retrieve() {
         List<Produto> listaProdutos;
-        listaProdutos = entityManager.createQuery("select pro from produto pro", Produto.class).getResultList();
+        listaProdutos = entityManager.createQuery("select p from Produto p", Produto.class).getResultList();
         return listaProdutos;
     }
 
@@ -77,7 +77,7 @@ public class ProdutoDao implements InterfaceDao<Produto> {
 
     public List<Produto> retrieve(String nomeParametro, String parString) {
         List<Produto> listaProduto;
-        listaProduto = entityManager.createQuery("SELECT pro FROM produto pro WHERE " + nomeParametro + "  like "
+        listaProduto = entityManager.createQuery("SELECT p FROM Produto p WHERE p." + nomeParametro + "  like "
                 + ":parDescricao", Produto.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
         return listaProduto;
     }

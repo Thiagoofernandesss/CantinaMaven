@@ -167,12 +167,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jTextFieldCodigoBarras.setText("");
 
         jLabelCodigoBarras1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelCodigoBarras1.setText("Preço R$");
-
-        jTextFieldPreco.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldPreco.setText("0.00");
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);

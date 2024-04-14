@@ -6,6 +6,7 @@ package model.bo;
 
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,8 +29,8 @@ public class MovimentacaoEstoque implements Serializable {
     private int id;
     
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private DateTimeFormatter dataHoraMovimento;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataHoraMovimento;
     
     @Column
     private char flagTipoMovimento;
@@ -64,7 +65,7 @@ public class MovimentacaoEstoque implements Serializable {
     public MovimentacaoEstoque() {
     }
 
-    public MovimentacaoEstoque(int id, DateTimeFormatter dataHoraMovimento, char flagTipoMovimento, float qtdMovimentada, String observacaoMovimento, char status, ItemVenda itemVenda, ItemCompra itemCompra, Produto produto, Funcionario funcionario) {
+    public MovimentacaoEstoque(int id, Date dataHoraMovimento, char flagTipoMovimento, float qtdMovimentada, String observacaoMovimento, char status, ItemVenda itemVenda, ItemCompra itemCompra, Produto produto, Funcionario funcionario) {
         this.id = id;
         this.dataHoraMovimento = dataHoraMovimento;
         this.flagTipoMovimento = flagTipoMovimento;
@@ -117,7 +118,7 @@ public class MovimentacaoEstoque implements Serializable {
         return id;
     }
 
-    public DateTimeFormatter getDataHoraMovimento() {
+    public Date getDataHoraMovimento() {
         return dataHoraMovimento;
     }
 
@@ -141,7 +142,7 @@ public class MovimentacaoEstoque implements Serializable {
         this.id = id;
     }
 
-    public void setDataHoraMovimento(DateTimeFormatter dataHoraMovimento) {
+    public void setDataHoraMovimento(Date dataHoraMovimento) {
         this.dataHoraMovimento = dataHoraMovimento;
     }
 

@@ -6,6 +6,7 @@ package model.bo;
 
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,8 +29,8 @@ public class Venda implements Serializable {
     private int id;
     
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private String datahoravenda;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date datahoravenda;
     
     @Column
     private float valorDesconto;
@@ -55,7 +56,7 @@ public class Venda implements Serializable {
     }
 
 
-    public Venda(int id, String dataHoraVenda, float valorDesconto, char flagTipoDesconto, String observacao, char status, Carteirinha carteirinha, Funcionario funcionario) {
+    public Venda(int id, Date dataHoraVenda, float valorDesconto, char flagTipoDesconto, String observacao, char status, Carteirinha carteirinha, Funcionario funcionario) {
         this.id = id;
         this.datahoravenda = dataHoraVenda;
         this.valorDesconto = valorDesconto;
@@ -87,7 +88,7 @@ public class Venda implements Serializable {
         return id;
     }
 
-    public String getDataHoraVenda() {
+    public Date getDataHoraVenda() {
         return datahoravenda;
     }
 
@@ -111,7 +112,7 @@ public class Venda implements Serializable {
         this.id = id;
     }
 
-    public void setDataHoraVenda(String dataHoraVenda) {
+    public void setDataHoraVenda(Date dataHoraVenda) {
         this.datahoravenda = dataHoraVenda;
     }
 

@@ -7,6 +7,7 @@ package model.bo;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,10 +29,10 @@ public class MovimentoCaixa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    /*@Column
-    //@Temporal(javax.persistence.TemporalType.DATE)
-    private LocalDateTime dataHorarioMovimento;
-    */
+    @Column
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataHorarioMovimento;
+    
     @Column
     private float valorMovimento;
     
@@ -55,9 +56,9 @@ public class MovimentoCaixa implements Serializable {
     public MovimentoCaixa() {
     }
 
-    public MovimentoCaixa(int id, DateTimeFormatter dataHorarioMovimento, float valorMovimento, String observacao, char flagTipoMovimento, char status, Contas contas, Caixa caixa) {
+    public MovimentoCaixa(int id, Date dataHorarioMovimento, float valorMovimento, String observacao, char flagTipoMovimento, char status, Contas contas, Caixa caixa) {
         this.id = id;
-        //this.dataHorarioMovimento = dataHorarioMovimento;
+        this.dataHorarioMovimento = dataHorarioMovimento;
         this.valorMovimento = valorMovimento;
         this.observacao = observacao;
         this.flagTipoMovimento = flagTipoMovimento;
@@ -85,10 +86,10 @@ public class MovimentoCaixa implements Serializable {
     public int getId() {
         return id;
     }
-
-  /*  public DateTimeFormatter getDataHorarioMovimento() {
+    
+    public Date getDataHorarioMovimento() {
         return dataHorarioMovimento;
-    }*/
+    }
 
     public float getValorMovimento() {
         return valorMovimento;
@@ -109,10 +110,10 @@ public class MovimentoCaixa implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-/*
-    public void setDataHorarioMovimento(DateTimeFormatter dataHorarioMovimento) {
+    
+    public void setDataHorarioMovimento(Date dataHorarioMovimento) {
         this.dataHorarioMovimento = dataHorarioMovimento;
-    }*/
+    }
 
     public void setValorMovimento(float valorMovimento) {
         this.valorMovimento = valorMovimento;

@@ -114,6 +114,7 @@ view\CadastroEndereco$4.class
 service\VendaService.class
 view\MenuPrincipal$7.class
 view\PontoVenda$10.class
+view\BuscaFuncionario$3$1.class
 controller\ControllerBuscaCarteirinha.class
 view\BuscaCaixa.class
 view\TemplateCadastro$2.class
@@ -200,6 +201,7 @@ controller\ControllerCadastroCliente$1.class
 view\CadastroCaixa.class
 view\CadastroCidade$5.class
 controller\ControllerBuscaCaixa.class
+view\BuscaFuncionario$3.class
 controller\ControllerCadastroCliente$4.class
 view\MenuPrincipal$1.class
 view\MenuPrincipal$10.class
@@ -208,7 +210,6 @@ view\CadastroCarteirinha$3.class
 view\BuscaEndereco$2$1.class
 view\CadastroBairro$2.class
 view\CadastroFornecedor$4.class
-view\BuscaFuncionario$2$1.class
 view\PontoVenda$1.class
 controller\ControllerCadastroEndereco$2.class
 view\CadastroCliente$8.class

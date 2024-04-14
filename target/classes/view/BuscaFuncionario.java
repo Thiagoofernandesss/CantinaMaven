@@ -181,7 +181,12 @@ public class BuscaFuncionario extends javax.swing.JDialog {
         jButtonFiltrar.setText("Filtrar");
         jButtonFiltrar.setBorder(null);
 
-        jComboBoxBuscaFuncionariosPor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome", "CPF", "RG", "Usuário", "Status", " " }));
+        jComboBoxBuscaFuncionariosPor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome", "CPF", "RG", "Usuário", "Status" }));
+        jComboBoxBuscaFuncionariosPor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxBuscaFuncionariosPorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelFiltroLayout = new javax.swing.GroupLayout(jPanelFiltro);
         jPanelFiltro.setLayout(jPanelFiltroLayout);
@@ -281,6 +286,10 @@ public class BuscaFuncionario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBoxBuscaFuncionariosPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxBuscaFuncionariosPorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxBuscaFuncionariosPorActionPerformed
 
     /**
      * @param args the command line arguments

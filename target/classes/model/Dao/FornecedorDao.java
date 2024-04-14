@@ -63,7 +63,7 @@ public class FornecedorDao implements InterfaceDao<Fornecedor> {
     @Override
     public List<Fornecedor> retrieve() {
         List<Fornecedor> listaFornecedores;
-        listaFornecedores = entityManager.createQuery("select for from fornecedor for", Fornecedor.class).getResultList();
+        listaFornecedores = entityManager.createQuery("select f from Fornecedor f", Fornecedor.class).getResultList();
         return listaFornecedores;
     }
 
@@ -74,7 +74,7 @@ public class FornecedorDao implements InterfaceDao<Fornecedor> {
 
     public List<Fornecedor> retrieve(String nomeParametro, String parString) {
         List<Fornecedor> listaFornecedores;
-        listaFornecedores = entityManager.createQuery("Select for from fornecedor for Where " + nomeParametro + "  like "
+        listaFornecedores = entityManager.createQuery("Select f from Fornecedor f Where f." + nomeParametro + "  like "
                 + ":parDescricao", Fornecedor.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
         return listaFornecedores;
     }

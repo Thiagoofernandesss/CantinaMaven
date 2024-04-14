@@ -82,8 +82,8 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
             funcionario.setFone2(this.cadastroFuncionario.getjFormattedTextFieldFone2().getText());
             funcionario.setEmail(this.cadastroFuncionario.getjTextFieldEmail().getText());
             funcionario.setStatus(this.cadastroFuncionario.getjCheckBoxStatus().isSelected());
-            funcionario.setCpf(this.cadastroFuncionario.getjFormattedTextFieldCPF().getText());
-            String cpfString = this.cadastroFuncionario.getjFormattedTextFieldCPF().getText();
+            funcionario.setCpf(this.cadastroFuncionario.getjFormattedTextFieldCPF().getText().replace(" ", ""));
+            //String cpfString = this.cadastroFuncionario.getjFormattedTextFieldCPF().getText();
             funcionario.setRg(this.cadastroFuncionario.getjFormattedTextFieldRg().getText());
             funcionario.setComplementoEndereco(this.cadastroFuncionario.getjTextFieldComplementoEndereco().getText());
             funcionario.setUsuario(this.cadastroFuncionario.getjTextFieldUsuario().getText());

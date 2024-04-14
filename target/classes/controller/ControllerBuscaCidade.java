@@ -33,8 +33,8 @@ public class ControllerBuscaCidade implements ActionListener {
     }
 
     @Override
-     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.buscaCidade.getjButtonFiltrar()) {        
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.buscaCidade.getjButtonFiltrar()) {
             DefaultTableModel tabela = (DefaultTableModel) this.buscaCidade.getjTableDados().getModel();
             tabela.setRowCount(0);
 
@@ -55,11 +55,18 @@ public class ControllerBuscaCidade implements ActionListener {
                 List<Cidade> listaCidades = new ArrayList<Cidade>();
 
                 if (this.buscaCidade.getjComboBoxBuscaCidadesPor().getSelectedItem().toString().equalsIgnoreCase("id")) {
-                    listaCidades.add(service.CidadeService.carregar(Integer.parseInt(this.buscaCidade.getjTextFieldFiltrar().getText())));
+
+                    try {
+                        int id = Integer.parseInt(filtro);
+                        listaCidades.add(service.CidadeService.carregar(id));
+                    } catch (NumberFormatException ex) {
+                        // Tratar o caso em que o texto não é um número válido
+                        JOptionPane.showMessageDialog(null, "O ID deve ser um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else if (this.buscaCidade.getjComboBoxBuscaCidadesPor().getSelectedItem().toString().equalsIgnoreCase("descrição")) {
-                    listaCidades = service.CidadeService.carregar("cidade.descricao", this.buscaCidade.getjTextFieldFiltrar().getText());
+                    listaCidades = service.CidadeService.carregar("descricao", this.buscaCidade.getjTextFieldFiltrar().getText());
                 } else if (this.buscaCidade.getjComboBoxBuscaCidadesPor().getSelectedItem().toString().equalsIgnoreCase("uf")) {
-                    listaCidades = service.CidadeService.carregar("cidade.uf", this.buscaCidade.getjTextFieldFiltrar().getText());
+                    listaCidades = service.CidadeService.carregar("uf", this.buscaCidade.getjTextFieldFiltrar().getText());
                 } else {
                     listaCidades = service.CidadeService.carregar(this.buscaCidade.getjComboBoxBuscaCidadesPor().getSelectedItem().toString(),
                             this.buscaCidade.getjTextFieldFiltrar().getText());
@@ -84,6 +91,5 @@ public class ControllerBuscaCidade implements ActionListener {
             this.buscaCidade.dispose();
         }
     }
-
 
 }

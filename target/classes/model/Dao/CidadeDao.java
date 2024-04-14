@@ -12,9 +12,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import sun.security.jca.GetInstance;
 
-
 public class CidadeDao implements InterfaceDao<Cidade> {
-    
+
     private static CidadeDao instance;
     protected EntityManager entityManager;
 
@@ -45,7 +44,7 @@ public class CidadeDao implements InterfaceDao<Cidade> {
             entityManager.getTransaction().begin();
             entityManager.persist(objeto);
             entityManager.getTransaction().commit();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -55,23 +54,23 @@ public class CidadeDao implements InterfaceDao<Cidade> {
     @Override
     public List<Cidade> retrieve() {
         List<Cidade> listaCidades;
-        listaCidades = entityManager.createQuery("select c from Cidade c",Cidade.class).getResultList();
+        listaCidades = entityManager.createQuery("select c from Cidade c", Cidade.class).getResultList();
         return listaCidades;
     }
 
     @Override
     public Cidade retrieve(int parPK) {
-        return entityManager.find(Cidade.class,parPK);
+        return entityManager.find(Cidade.class, parPK);
     }
 
-    
-    public List<Cidade> retrieve(String nomeParametro, String parString) {
+    public List<Cidade> retrieve(String nomeCampo, String valor) {
         List<Cidade> listaCidades;
-        listaCidades = entityManager.createQuery("Select c From Cidade c Where " + nomeParametro + "  like "
-                + ":parDescricao", Cidade.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
-        return listaCidades;   
+        String jpql = "SELECT c FROM Cidade c WHERE c." + nomeCampo + " LIKE :parDescricao";
+        listaCidades = entityManager.createQuery(jpql, Cidade.class)
+                .setParameter("parDescricao", "%" + valor + "%")
+                .getResultList();
+        return listaCidades;
     }
-    
 
     @Override
     public void update(Cidade objeto) {
@@ -80,12 +79,12 @@ public class CidadeDao implements InterfaceDao<Cidade> {
             entityManager.getTransaction().begin();
             entityManager.merge(objeto);
             entityManager.getTransaction().commit();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
         }
-        
+
     }
 
     @Override
@@ -95,7 +94,7 @@ public class CidadeDao implements InterfaceDao<Cidade> {
             entityManager.getTransaction().begin();
             entityManager.remove(objeto);
             entityManager.getTransaction().commit();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();

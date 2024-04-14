@@ -79,7 +79,8 @@ public class EnderecoDao implements InterfaceDao<Endereco> {
 
     public List<Endereco> retrieve(String nomeParametro, String parString) {
         List<Endereco> listaEnderecos;
-        listaEnderecos = entityManager.createQuery("Select e From Endereco e Where " + nomeParametro + "  like "
+        
+        listaEnderecos = entityManager.createQuery("Select e From Endereco e Where e." + nomeParametro + "  like "
                 + ":parDescricao", Endereco.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
         return listaEnderecos;
     }

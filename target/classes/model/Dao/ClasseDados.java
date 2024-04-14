@@ -161,6 +161,7 @@ public class ClasseDados {
         //produtos.add(produto3);
         
         //Compras
+        /*
         Compra compra1 = new Compra(1, 10, DateTimeFormatter.ISO_LOCAL_DATE, 0, 'S', 'A', "", fornecedor1);
         Compra compra2 = new Compra(2, 20, DateTimeFormatter.ISO_LOCAL_DATE, 0, 'S', 'A', "", fornecedor2);
         Compra compra3 = new Compra(3, 30, DateTimeFormatter.ISO_LOCAL_DATE, 0, 'S', 'A', "", fornecedor3);
@@ -168,6 +169,7 @@ public class ClasseDados {
         compras.add(compra1);
         compras.add(compra2);
         compras.add(compra3);
+        */
         
         //Vendas
         //Venda venda1 = new Venda(1, DateTimeFormatter.ISO_LOCAL_DATE, 0, 'S', "", 'A', carteirinha1, funcionario1);

@@ -65,7 +65,7 @@ public class FuncionarioDao implements  InterfaceDao<Funcionario>{
     @Override
     public List<Funcionario> retrieve() {      
         List<Funcionario> listaFuncionarios;
-        listaFuncionarios = entityManager.createQuery("select fun from funcionario fun",Funcionario.class).getResultList();
+        listaFuncionarios = entityManager.createQuery("select f from Funcionario f",Funcionario.class).getResultList();
         return listaFuncionarios;
   
     }
@@ -78,7 +78,7 @@ public class FuncionarioDao implements  InterfaceDao<Funcionario>{
 
     public List<Funcionario> retrieve(String nomeParametro, String parString) {
         List<Funcionario> listaFuncionarios;
-        listaFuncionarios = entityManager.createQuery("Select fun From funcionario fun Where " + nomeParametro + "  like "
+        listaFuncionarios = entityManager.createQuery("Select f From Funcionario f Where f." + nomeParametro + "  like "
                 + ":parDescricao", Funcionario.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
         return listaFuncionarios;
     }

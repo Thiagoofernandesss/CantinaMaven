@@ -22,25 +22,26 @@ import view.CadastroFuncionario;
  *
  * @author gabri
  */
-public class ControllerCadastraCaixa implements ActionListener{
+public class ControllerCadastraCaixa implements ActionListener {
+
     private CadastroCaixa cadastroCaixa;
-    public  static int codigo;
-    
-    public ControllerCadastraCaixa(CadastroCaixa cadastroCaixa){
+    public static int codigo;
+
+    public ControllerCadastraCaixa(CadastroCaixa cadastroCaixa) {
         this.cadastroCaixa = cadastroCaixa;
-        
+
         this.cadastroCaixa.getjButtonNovo().addActionListener(this);
         this.cadastroCaixa.getjButtonSair().addActionListener(this);
         this.cadastroCaixa.getjButtonCancelar().addActionListener(this);
         this.cadastroCaixa.getjButtonSalvar().addActionListener(this);
         this.cadastroCaixa.getjButtonConsultar().addActionListener(this);
-        
+
         this.cadastroCaixa.getjButtonAdicionarFuncionario().addActionListener(this);
         this.cadastroCaixa.getjButtonPesquisarFuncionario().addActionListener(this);
-        
+
         List<Funcionario> listaFuncionario = new ArrayList<>();
         listaFuncionario = service.FuncionarioService.carregar();
-        
+
         utilities.Utilities.ativa(true, this.cadastroCaixa.getjPanelBotoes());
         utilities.Utilities.limpaComponentes(false, this.cadastroCaixa.getjPanelDados());
 
@@ -62,42 +63,45 @@ public class ControllerCadastraCaixa implements ActionListener{
             utilities.Utilities.ativa(true, this.cadastroCaixa.getjPanelBotoes());
             utilities.Utilities.limpaComponentes(false, this.cadastroCaixa.getjPanelDados());
 
-        }else if (e.getSource() == this.cadastroCaixa.getjButtonSalvar()) {
+        } else if (e.getSource() == this.cadastroCaixa.getjButtonSalvar()) {
             //Ação Botão Salvar
             Caixa caixa = new Caixa();
-            
+
             caixa.setObservaccao(this.cadastroCaixa.getjTextFieldObservacao().getText());
             caixa.setValorAbertura(Float.parseFloat(this.cadastroCaixa.getjFTFTSaldoInicial().getText()));
             caixa.setValorFechamento(Float.parseFloat(this.cadastroCaixa.getjFTFSaldoFinal().getText()));
             caixa.setStatu(this.cadastroCaixa.getjCheckBoxStatusCaixa().isSelected());
-            
+
             String dataHoraAbertura = this.cadastroCaixa.getjFTFDataAbertura().getText();
-            SimpleDateFormat formatoAberturaEntrada = new SimpleDateFormat("dd/MM/yyyy");
-            SimpleDateFormat formatoAberturaSaida = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy/MM/dd");
 
             try {
-                java.util.Date dataAbertura = formatoAberturaEntrada.parse(dataHoraAbertura);
-                String dataAberturaFormatada = formatoAberturaSaida.format(dataAbertura);
+                java.util.Date dataAbertura = formatoEntrada.parse(dataHoraAbertura);
+                String dataAberturaFormatada = formatoSaida.format(dataAbertura); // Formatar a data no formato esperado pelo banco
 
-                caixa.setDataHoraAbertura(dataAberturaFormatada);
+                java.util.Date dataAberturaFormatadaDate = formatoSaida.parse(dataAberturaFormatada); // Convertendo de String para Date
+
+                caixa.setDataHoraAbertura(dataAberturaFormatadaDate); // Passando a data formatada para setDataHoraAbertura
             } catch (ParseException m) {
                 // Lida com erros de formatação da data, se necessário
             }
-            
+
             String dataHoraFechamento = this.cadastroCaixa.getjFTFDataFechamento().getText();
-            SimpleDateFormat formatoFechamentoEntrada = new SimpleDateFormat("dd/MM/yyyy");
-            SimpleDateFormat formatoFechamentoSaida = new SimpleDateFormat("yyyy-MM-dd");
+
 
             try {
-                java.util.Date dataFechamento = formatoAberturaEntrada.parse(dataHoraFechamento);
-                String dataFechamentoFormatada = formatoAberturaSaida.format(dataFechamento);
+                java.util.Date dataFechamento = formatoEntrada.parse(dataHoraFechamento);
+                String dataFechamentoFormatada = formatoSaida.format(dataFechamento);
+                
+                java.util.Date dataFechamentoFormatadaDate = formatoSaida.parse(dataFechamentoFormatada);
 
-                caixa.setDataHoraFechamento(dataFechamentoFormatada);
+                caixa.setDataHoraFechamento(dataFechamentoFormatadaDate);
             } catch (ParseException m) {
                 // Lida com erros de formatação da data, se necessário
             }
-            
-            Funcionario funcionario = FuncionarioService.carregar("",this.cadastroCaixa.getjTextFieldFiltrarFuncionario().getText()).get(0);
+
+            Funcionario funcionario = FuncionarioService.carregar("", this.cadastroCaixa.getjTextFieldFiltrarFuncionario().getText()).get(0);
 
             caixa.setFuncionario(funcionario);
 
@@ -121,7 +125,7 @@ public class ControllerCadastraCaixa implements ActionListener{
 
             }
 
-        }else if (e.getSource() == this.cadastroCaixa.getjButtonConsultar()) {
+        } else if (e.getSource() == this.cadastroCaixa.getjButtonConsultar()) {
             codigo = 0;
 
             BuscaCaixa buscaCaixa = new BuscaCaixa(null, true);
@@ -137,40 +141,27 @@ public class ControllerCadastraCaixa implements ActionListener{
                 Caixa caixa = new Caixa();
                 caixa = service.CaixaService.carregar(codigo);
 
-                this.cadastroCaixa.getjTextFieldObservacao().setText(caixa.getObservaccao()+"");
-                this.cadastroCaixa.getjFTFTSaldoInicial().setText(caixa.getValorAbertura()+"");
-                this.cadastroCaixa.getjFTFSaldoFinal().setText(caixa.getValorFechamento()+"");
-                            
-                String dataHoraAberturaBanco = caixa.getDataHoraAbertura();
-                SimpleDateFormat formatoAberturaEntrada = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat formatoAberturaSaida = new SimpleDateFormat("yyyy-MM-dd");
+                this.cadastroCaixa.getjTextFieldObservacao().setText(caixa.getObservaccao() + "");
+                this.cadastroCaixa.getjFTFTSaldoInicial().setText(caixa.getValorAbertura() + "");
+                this.cadastroCaixa.getjFTFSaldoFinal().setText(caixa.getValorFechamento() + "");
 
-                try {
-                    java.util.Date dataAbertura = formatoAberturaEntrada.parse(dataHoraAberturaBanco);
-                    String dataAberturaFormatada = formatoAberturaSaida.format(dataAbertura);
-                    this.cadastroCaixa.getjFTFDataAbertura().setText(dataAberturaFormatada);
-                    
-                } catch (ParseException m) {
-                    // Lida com erros de formatação da data, se necessário
-                }
-            
-                String dataHoraFechamentoBanco = caixa.getDataHoraFechamento();
-                SimpleDateFormat formatoFechamentoEntrada = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat formatoFechamentoSaida = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date dataHoraAberturaBanco = caixa.getDataHoraAbertura();
+                SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
 
-                try {
-                    java.util.Date dataFechamento = formatoAberturaEntrada.parse(dataHoraFechamentoBanco);
-                    String dataFechamentoFormatada = formatoAberturaSaida.format(dataFechamento);
-                    this.cadastroCaixa.getjFTFDataFechamento().setText(dataFechamentoFormatada);
-                    
-                } catch (ParseException m) {
-                    // Lida com erros de formatação da data, se necessário
-                }
-                
+                //java.util.Date dataAbertura = formatoAberturaEntrada.parse(dataHoraAberturaBanco);
+                String dataAberturaFormatada = formatoSaida.format(dataHoraAberturaBanco);
+                this.cadastroCaixa.getjFTFDataAbertura().setText(dataAberturaFormatada);
 
-                this.cadastroCaixa.getjTextFieldFiltrarFuncionario().setText(caixa.getFuncionario().getId()+ "");
- 
-                if (caixa.getStatus()== 'I') {
+                java.util.Date dataHoraFechamentoBanco = caixa.getDataHoraFechamento();
+
+                //java.util.Date dataFechamento = formatoEntrada.parse(dataHoraFechamentoBanco);
+                String dataFechamentoFormatada = formatoSaida.format(dataHoraFechamentoBanco);
+                this.cadastroCaixa.getjFTFDataFechamento().setText(dataFechamentoFormatada);
+
+                this.cadastroCaixa.getjTextFieldFiltrarFuncionario().setText(caixa.getFuncionario().getId() + "");
+
+                if (caixa.getStatus() == 'I') {
                     this.cadastroCaixa.getjCheckBoxStatusCaixa().setSelected(true);
                 }
 
@@ -189,9 +180,9 @@ public class ControllerCadastraCaixa implements ActionListener{
 
         }
     }
-    
-     public Funcionario getFuncioanrioEndById(int idFuncionarioEnd){
-        for(Funcionario funcionarioAtual : service.FuncionarioService.carregar()) {
+
+    public Funcionario getFuncioanrioEndById(int idFuncionarioEnd) {
+        for (Funcionario funcionarioAtual : service.FuncionarioService.carregar()) {
             if (funcionarioAtual.getId() == idFuncionarioEnd) {
                 return funcionarioAtual;
             }
@@ -199,12 +190,12 @@ public class ControllerCadastraCaixa implements ActionListener{
         }
         return null;
     }
-    
-        private void buscarFuncionario(){
+
+    private void buscarFuncionario() {
         BuscaFuncionario buscaFuncionario = new BuscaFuncionario(null, true);
         ControllerBuscaFuncionario controllerBuscaFuncionario = new ControllerBuscaFuncionario(buscaFuncionario);
         buscaFuncionario.setVisible(true);
-        
+
         if (ControllerCadastroFuncionario.codigo != 0) {
             Funcionario funcionario = getFuncioanrioEndById(ControllerCadastroFuncionario.codigo);
             this.cadastroCaixa.getjTextFieldFiltrarFuncionario().setText(funcionario.getNome());

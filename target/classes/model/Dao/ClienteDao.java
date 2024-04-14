@@ -68,7 +68,7 @@ public class ClienteDao implements InterfaceDao<Cliente> {
     @Override
     public List<Cliente> retrieve() {
         List<Cliente> listaClientes;
-        listaClientes = entityManager.createQuery("select c from cliente c",Cliente.class).getResultList();
+        listaClientes = entityManager.createQuery("select c from Cliente c",Cliente.class).getResultList();
         return listaClientes;
 
     }
@@ -80,7 +80,7 @@ public class ClienteDao implements InterfaceDao<Cliente> {
 
     public List<Cliente> retrieve(String nomeParametro, String parString) {
         List<Cliente> listaClientes;
-        listaClientes = entityManager.createQuery("Select c From Cliente c Where " + nomeParametro + "  like "
+        listaClientes = entityManager.createQuery("Select c From Cliente c Where c." + nomeParametro + "  like "
                 + ":parDescricao", Cliente.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
         return listaClientes;
     }

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bo.Cliente;
 import view.BuscaCliente;
@@ -43,42 +44,41 @@ public class ControllerBuscaCliente implements ActionListener {
                 List<Cliente> listaClientes = service.ClienteService.carregar();
                 for (Cliente clienteAtual : listaClientes) {
                     tabela.addRow(new Object[]{
-                    clienteAtual.getId(),
-                    clienteAtual.getNome(),
-                    clienteAtual.getCpf(),
-                    clienteAtual.getMatricula(),
-                    clienteAtual.getStatus()
-                });
-            }
-        } else {
-            // Se houver texto no campo de filtro, realiza a busca com base no critério selecionado
-            String buscaPor = this.buscaCliente.getjComboBoxBuscaClientesPor().getSelectedItem().toString().toLowerCase();
-
-            List<Cliente> listaClientes;
-
-            if (buscaPor.equals("id")) {
-                listaClientes = new ArrayList<>();
-                Cliente cliente = service.ClienteService.carregar(Integer.parseInt(filtro));
-                if (cliente != null) {
-                    listaClientes.add(cliente);
+                        clienteAtual.getId(),
+                        clienteAtual.getNome(),
+                        clienteAtual.getCpf(),
+                        clienteAtual.getMatricula(),
+                        clienteAtual.getStatus()});
                 }
-            } else if (buscaPor.equals("matrícula")) {
-                listaClientes = service.ClienteService.carregar("matricula", filtro);
             } else {
-                listaClientes = service.ClienteService.carregar(buscaPor, filtro);
-            }
+                List<Cliente> listaClientes = new ArrayList<>();
+                
+                if(this.buscaCliente.getjComboBoxBuscaClientesPor().getSelectedItem().toString().equalsIgnoreCase("id")){
+                    try {
+                        int id = Integer.parseInt(filtro);
+                        listaClientes.add(service.ClienteService.carregar(id));
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "O ID deve ser um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else if(this.buscaCliente.getjComboBoxBuscaClientesPor().getSelectedItem().toString().equalsIgnoreCase("matrícula")){
+                    listaClientes = service.ClienteService.carregar("matricula", this.buscaCliente.getjTextFieldFiltrar().getText());
+                
+                } else{
+                    listaClientes = service.ClienteService.carregar(this.buscaCliente.getjComboBoxBuscaClientesPor()
+                            .getSelectedItem().toString().trim().toLowerCase(), this.buscaCliente.getjTextFieldFiltrar().getText());
+                }
 
-            for (Cliente clienteAtual : listaClientes) {
-                tabela.addRow(new Object[]{
-                clienteAtual.getId(),
-                clienteAtual.getNome(),
-                clienteAtual.getCpf(),
-                clienteAtual.getMatricula(),
-                clienteAtual.getStatus()
-            });
-        }
-    }
-    }else if (e.getSource() == this.buscaCliente.getjButtonCarregar()) {
+                for (Cliente clienteAtual : listaClientes) {
+                    tabela.addRow(new Object[]{
+                        clienteAtual.getId(),
+                        clienteAtual.getNome(),
+                        clienteAtual.getCpf(),
+                        clienteAtual.getMatricula(),
+                        clienteAtual.getStatus()
+                    });
+                }
+            }
+        } else if (e.getSource() == this.buscaCliente.getjButtonCarregar()) {
             controller.ControllerCadastroCliente.codigo = (int) this.buscaCliente.getjTableDados().
                     getValueAt(this.buscaCliente.getjTableDados().getSelectedRow(), 0);
 

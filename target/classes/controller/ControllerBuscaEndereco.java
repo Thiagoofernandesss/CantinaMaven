@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bo.Endereco;
+import sun.print.resources.serviceui;
 import view.BuscaEndereco;
 
 /**
@@ -34,22 +35,13 @@ public class ControllerBuscaEndereco implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.buscaEndereco.getjButtonFiltrar()) {
-            if (!this.buscaEndereco.getjTextFieldFiltrar().getText().trim().equalsIgnoreCase("")) {
-                List<Endereco> listaEnderecos = new ArrayList<Endereco>();
+            DefaultTableModel tabela = (DefaultTableModel) this.buscaEndereco.getjTableDados().getModel();
+            tabela.setRowCount(0);
 
-                if (this.buscaEndereco.getjComboBoxBuscaEnderecoPor().getSelectedItem().toString().equalsIgnoreCase("id")) {
-                    listaEnderecos.add(service.EnderecoService.carregar(Integer.parseInt(this.buscaEndereco.getjTextFieldFiltrar().getText())));
-                } else if (this.buscaEndereco.getjComboBoxBuscaEnderecoPor().getSelectedItem().toString().equalsIgnoreCase("cidade")) {
-                    listaEnderecos = service.EnderecoService.carregar("cidade.descricao", this.buscaEndereco.getjTextFieldFiltrar().getText());
-                } else if (this.buscaEndereco.getjComboBoxBuscaEnderecoPor().getSelectedItem().toString().equalsIgnoreCase("bairro")) {
-                    listaEnderecos = service.EnderecoService.carregar("bairro.descricao", this.buscaEndereco.getjTextFieldFiltrar().getText());
-                } else {
-                    listaEnderecos = service.EnderecoService.carregar(this.buscaEndereco.getjComboBoxBuscaEnderecoPor().getSelectedItem().toString(),
-                            this.buscaEndereco.getjTextFieldFiltrar().getText());
-                }
+            String filtro = this.buscaEndereco.getjTextFieldFiltrar().getText().trim();
 
-                DefaultTableModel tabela = (DefaultTableModel) this.buscaEndereco.getjTableDados().getModel();
-                tabela.setRowCount(0);
+            if (filtro.isEmpty()) {
+                List<Endereco> listaEnderecos = service.EnderecoService.carregar();
 
                 for (Endereco enderecoAtual : listaEnderecos) {
                     tabela.addRow(new Object[]{enderecoAtual.getId(),
@@ -58,13 +50,38 @@ public class ControllerBuscaEndereco implements ActionListener {
                         enderecoAtual.getStatus(),
                         enderecoAtual.getCidade().getDescricao(),
                         enderecoAtual.getBairro().getDescricao()});
-
                 }
+            } else {
+                List<Endereco> listaEnderecos = new ArrayList<Endereco>();
 
-            }else{
-                JOptionPane.showMessageDialog(null, "Atenção!\nOpção de Filtro Vazia...");
-                this.buscaEndereco.getjTextFieldFiltrar().requestFocus();
+                if (this.buscaEndereco.getjComboBoxBuscaEnderecoPor().getSelectedItem().toString().equalsIgnoreCase("id")) {
+                    try {
+                        int id = Integer.parseInt(filtro);
+                        listaEnderecos.add(service.EnderecoService.carregar(id));
+
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "O ID deve ser um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+
+                    }
+                } else if (this.buscaEndereco.getjComboBoxBuscaEnderecoPor().getSelectedItem().toString().equalsIgnoreCase("cidade")) {
+                    listaEnderecos = service.EnderecoService.carregar("cidade.descricao", this.buscaEndereco.getjTextFieldFiltrar().getText());
+                } else if (this.buscaEndereco.getjComboBoxBuscaEnderecoPor().getSelectedItem().toString().equalsIgnoreCase("bairro")) {
+                    listaEnderecos = service.EnderecoService.carregar("bairro.descricao", this.buscaEndereco.getjTextFieldFiltrar().getText());
+                } else {
+                    listaEnderecos = service.EnderecoService.carregar(this.buscaEndereco.getjComboBoxBuscaEnderecoPor().getSelectedItem().toString().trim().toLowerCase(),
+                            this.buscaEndereco.getjTextFieldFiltrar().getText());
+                }
                 
+                 for (Endereco enderecoAtual : listaEnderecos) {
+                    tabela.addRow(new Object[]{enderecoAtual.getId(),
+                        enderecoAtual.getCep(),
+                        enderecoAtual.getLogradouro(),
+                        enderecoAtual.getStatus(),
+                        enderecoAtual.getCidade().getDescricao(),
+                        enderecoAtual.getBairro().getDescricao()});
+                }
+                
+
             }
 
         } else if (e.getSource() == this.buscaEndereco.getjButtonCarregar()) {
