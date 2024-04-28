@@ -101,14 +101,12 @@ Dao\ClasseDados.class
 view\BuscaCidade$1.class
 view\TemplateBusca$2.class
 view\CadastroBairro.class
-controller\ControllerCadastroProduto$2.class
 model\bo\Cidade.class
 view\MenuPrincipal$13.class
 model\bo\ItemVenda_.class
 view\CadastroProduto$7.class
 view\CadastroCliente$11.class
 view\PontoVenda$5.class
-controller\ControllerCadastroProduto$1.class
 view\CadastroEndereco$1.class
 view\CadastroProduto$1.class
 view\TemplateCadastro.class
@@ -210,7 +208,6 @@ view\CadastroCidade$5.class
 controller\ControllerBuscaCaixa.class
 view\BuscaFuncionario$3.class
 controller\ControllerCadastroCliente$4.class
-controller\ControllerCadastroProduto$3.class
 controller\ControllerCadastroFuncionario$2.class
 view\MenuPrincipal$1.class
 view\MenuPrincipal$10.class

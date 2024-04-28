@@ -51,6 +51,7 @@ public class ControllerBuscaProduto implements ActionListener {
                         produtoAtual.getDescricao(),
                         produtoAtual.getCodigoBarra(),
                         produtoAtual.getPreco(),
+                        produtoAtual.getQuantidade(),
                         produtoAtual.getStatus()
                     });
                 }
@@ -81,6 +82,7 @@ public class ControllerBuscaProduto implements ActionListener {
                         produtoAtual.getDescricao(),
                         produtoAtual.getCodigoBarra(),
                         produtoAtual.getPreco(),
+                        produtoAtual.getQuantidade(),
                         produtoAtual.getStatus()
                     });
                 }

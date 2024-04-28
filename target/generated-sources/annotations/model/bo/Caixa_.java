@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import model.bo.Funcionario;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-28T01:31:35")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-28T19:27:33")
 @StaticMetamodel(Caixa.class)
 public class Caixa_ { 
 

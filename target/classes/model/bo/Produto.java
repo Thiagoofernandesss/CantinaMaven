@@ -35,16 +35,20 @@ public class Produto implements Serializable {
     @Column
     private float preco;
     
+    @Column
+    private int quantidade;
+    
     public Produto() {
     }
 
-    public Produto(int id, String descricao, String codigoBarra, char status, float preco) {
+    public Produto(int id, String descricao, String codigoBarra, char status, float preco, int quantidade) {
         this.id = id;
         this.descricao = descricao;
         this.codigoBarra = codigoBarra;
-        this.preco=preco;
         this.status = status;
-    }
+        this.preco = preco;
+        this.quantidade = quantidade;
+    }    
 
     public int getId() {
         return id;
@@ -95,6 +99,15 @@ public class Produto implements Serializable {
         }
     
     }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
     
     
     
@@ -108,6 +121,7 @@ public class Produto implements Serializable {
                 + this.getDescricao() + ", " 
                 + this.getCodigoBarra() + ", "
                 + this.getStatus() + ", "
+                + this.getQuantidade() +", "
                 +this.getPreco();
 
     }

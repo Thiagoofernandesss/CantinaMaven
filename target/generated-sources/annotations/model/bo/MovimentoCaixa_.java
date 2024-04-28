@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import model.bo.Caixa;
 import model.bo.Contas;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-28T01:31:35")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-28T19:27:32")
 @StaticMetamodel(MovimentoCaixa.class)
 public class MovimentoCaixa_ { 
 

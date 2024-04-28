@@ -9,7 +9,7 @@ import model.bo.ItemCompra;
 import model.bo.ItemVenda;
 import model.bo.Produto;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-28T01:31:35")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-28T19:27:33")
 @StaticMetamodel(MovimentacaoEstoque.class)
 public class MovimentacaoEstoque_ { 
 

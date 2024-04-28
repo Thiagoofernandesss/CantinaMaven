@@ -282,7 +282,6 @@ public class PontoVenda extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(1020, 660));
         setMinimumSize(new java.awt.Dimension(1020, 660));
 
         jPanelFundo.setBackground(new java.awt.Color(147, 216, 67));

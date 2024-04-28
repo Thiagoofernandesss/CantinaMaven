@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import javax.swing.JOptionPane;
 import model.bo.Produto;
 import utilities.Utilities;
 import view.BuscaProduto;
@@ -22,42 +23,6 @@ public class ControllerCadastroProduto implements ActionListener {
     CadastroProduto cadastroProduto;
     public static int codigo;
 
-    FocusListener focusDescription = new FocusListener() {
-        @Override
-        public void focusGained(FocusEvent e) {
-            Utilities.turnTextFieldGray(cadastroProduto.getjTextFieldDescricao());
-        }
-
-        @Override
-        public void focusLost(FocusEvent e) {
-            Utilities.turnTextFieldRed(cadastroProduto.getjTextFieldDescricao());
-        }
-    };
-
-    FocusListener focusCodBarras = new FocusListener() {
-        @Override
-        public void focusGained(FocusEvent e) {
-            Utilities.turnTextFieldGray(cadastroProduto.getjTextFieldCodigoBarras());
-        }
-
-        @Override
-        public void focusLost(FocusEvent e) {
-            Utilities.turnTextFieldRed(cadastroProduto.getjTextFieldCodigoBarras());
-        }
-    };
-
-    FocusListener focusPrice = new FocusListener() {
-        @Override
-        public void focusGained(FocusEvent e) {
-            Utilities.turnPriceTextFieldGray(cadastroProduto.getjTextFieldPreco());
-        }
-
-        @Override
-        public void focusLost(FocusEvent e) {
-            Utilities.turnPriceTextFieldRed(cadastroProduto.getjTextFieldPreco());
-        }
-    };
-
     public ControllerCadastroProduto(CadastroProduto cadastroProduto) {
         this.cadastroProduto = cadastroProduto;
 
@@ -67,10 +32,7 @@ public class ControllerCadastroProduto implements ActionListener {
         this.cadastroProduto.getjButtonSalvar().addActionListener(this);
         this.cadastroProduto.getjButtonConsultar().addActionListener(this);
 
-        this.cadastroProduto.getjTextFieldDescricao().addFocusListener(focusDescription);
-        this.cadastroProduto.getjTextFieldCodigoBarras().addFocusListener(focusCodBarras);
-        this.cadastroProduto.getjTextFieldPreco().addFocusListener(focusPrice);
-        
+                
         utilities.Utilities.ativa(true, this.cadastroProduto.getjPanelBotoes());
         utilities.Utilities.limpaComponentes(false, this.cadastroProduto.getjPanelDados());
 
@@ -94,11 +56,17 @@ public class ControllerCadastroProduto implements ActionListener {
             utilities.Utilities.limpaComponentes(false, this.cadastroProduto.getjPanelDados());
 
         } else if (e.getSource() == this.cadastroProduto.getjButtonSalvar()) {
+            
+            if (!validarCampos()) {
+            return; // Se a validação falhar, interrompe a execução do método
+        }
+
 
             Produto produto = new Produto();
             produto.setDescricao(this.cadastroProduto.getjTextFieldDescricao().getText());
             produto.setCodigoBarra(this.cadastroProduto.getjTextFieldCodigoBarras().getText());
             produto.setPreco(Float.parseFloat(this.cadastroProduto.getjTextFieldPreco().getText()));
+            produto.setQuantidade(Integer.parseInt(this.cadastroProduto.getjTextFieldQuantidade().getText()));
             produto.setStatus(this.cadastroProduto.getjCheckBoxStatus().isSelected());
 
             if (this.cadastroProduto.getjTextFieldId().getText().equalsIgnoreCase("")) {
@@ -130,6 +98,7 @@ public class ControllerCadastroProduto implements ActionListener {
                 this.cadastroProduto.getjTextFieldId().setText(produto.getId() + "");
                 this.cadastroProduto.getjTextFieldDescricao().setText(produto.getDescricao() + "");
                 this.cadastroProduto.getjTextFieldCodigoBarras().setText(produto.getCodigoBarra() + "");
+                this.cadastroProduto.getjTextFieldQuantidade().setText(produto.getQuantidade()+"");
                 this.cadastroProduto.getjTextFieldPreco().setText(produto.getPreco() + "");
 
                 if (produto.getStatus() == 'I') {
@@ -143,5 +112,18 @@ public class ControllerCadastroProduto implements ActionListener {
 
         }
     }
+    
+    private boolean validarCampos() {
+    // Verifica se o campo de descrição está vazio
+    if (this.cadastroProduto.getjTextFieldDescricao().getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, preencha o campo de descrição.", "Campo obrigatório", JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
+    
+    // Aqui você pode adicionar mais verificações para outros campos, se necessário
+    
+    return true;
+}
+
 
 }
