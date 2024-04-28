@@ -15,6 +15,7 @@ import java.util.List;
 import model.bo.Carteirinha;
 import model.bo.Cliente;
 import service.ClienteService;
+import utilities.Utilities;
 import view.BuscaCarteirinha;
 import view.BuscaCliente;
 import view.CadastroCarteirinha;
@@ -26,9 +27,21 @@ import view.CadastroCliente;
  */
 public class ControllerCadastroCarteirinha implements ActionListener, FocusListener {
 
-    CadastroCarteirinha cadastroCarteirinha;
+    private CadastroCarteirinha cadastroCarteirinha;
     public static int codigo;
 
+    FocusListener focusCpf = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            Utilities.turnCepTextFieldGray(cadastroCarteirinha.getjFormattedTextFieldCPF());
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            Utilities.turnCepTextFieldRed(cadastroCarteirinha.getjFormattedTextFieldCPF());
+        }
+    };
 
     public ControllerCadastroCarteirinha(CadastroCarteirinha cadastroCarteirinha) {
         this.cadastroCarteirinha = cadastroCarteirinha;
@@ -38,17 +51,17 @@ public class ControllerCadastroCarteirinha implements ActionListener, FocusListe
         this.cadastroCarteirinha.getjButtonCancelar().addActionListener(this);
         this.cadastroCarteirinha.getjButtonConsultar().addActionListener(this);
         this.cadastroCarteirinha.getjButtonSair().addActionListener(this);
+
         this.cadastroCarteirinha.getjButtonPesquisarCPF().addActionListener(this);
         this.cadastroCarteirinha.getjButtonAdicionarCPF().addActionListener(this);
-        
-        this.cadastroCarteirinha.getjFormattedTextFieldCPF().addFocusListener(this);
-        
-        List<Cliente> listaCliente = new ArrayList<>();
-        
-        listaCliente = service.ClienteService.carregar();
-        
-        //this.cadastroCarteirinha.getjFormattedTextFieldCPF().addFocusListener(this);
 
+        this.cadastroCarteirinha.getjFormattedTextFieldCPF().addFocusListener(focusCpf);
+
+        List<Cliente> listaCliente = new ArrayList<>();
+
+        listaCliente = service.ClienteService.carregar();
+
+        //this.cadastroCarteirinha.getjFormattedTextFieldCPF().addFocusListener(this);
         utilities.Utilities.ativa(true, this.cadastroCarteirinha.getjPanelBotoes());
         utilities.Utilities.limpaComponentes(false, this.cadastroCarteirinha.getjPanelDados());
 
@@ -56,15 +69,16 @@ public class ControllerCadastroCarteirinha implements ActionListener, FocusListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.cadastroCarteirinha.getjButtonNovo()) { 
+        if (e.getSource() == this.cadastroCarteirinha.getjButtonNovo()) {
             utilities.Utilities.ativa(false, this.cadastroCarteirinha.getjPanelBotoes());
             utilities.Utilities.limpaComponentes(true, this.cadastroCarteirinha.getjPanelDados());
-            
+
             this.cadastroCarteirinha.getjTextFieldID().setEditable(false);
             this.cadastroCarteirinha.getjTextFieldNome().setEditable(false);
-            
+
             this.cadastroCarteirinha.getjFormattedTextFieldCPF().requestFocus();
-            
+            utilities.Utilities.turnCepTextFieldGray(this.cadastroCarteirinha.getjFormattedTextFieldCPF());
+
         } else if (e.getSource() == this.cadastroCarteirinha.getjButtonSair()) {
             this.cadastroCarteirinha.dispose();
 
@@ -103,7 +117,7 @@ public class ControllerCadastroCarteirinha implements ActionListener, FocusListe
                 // Lida com erros de formatação da data, se necessário
             }
 
-            Cliente cliente = ClienteService.carregar("cpf",this.cadastroCarteirinha.getjFormattedTextFieldCPF().getText()).get(0);
+            Cliente cliente = ClienteService.carregar("cpf", this.cadastroCarteirinha.getjFormattedTextFieldCPF().getText()).get(0);
 
             carteirinha.setCliente(cliente);
 
@@ -126,9 +140,8 @@ public class ControllerCadastroCarteirinha implements ActionListener, FocusListe
                 this.cadastroCarteirinha.getjTextFieldNome().setEditable(false);
 
             }
-            
 
-        } else if (e.getSource() == this.cadastroCarteirinha.getjButtonConsultar())  {
+        } else if (e.getSource() == this.cadastroCarteirinha.getjButtonConsultar()) {
             codigo = 0;
 
             BuscaCarteirinha buscaCarteirinha = new BuscaCarteirinha(null, true);
@@ -193,11 +206,29 @@ public class ControllerCadastroCarteirinha implements ActionListener, FocusListe
             cadastroCliente.setVisible(true);
 
         } else if (e.getSource() == this.cadastroCarteirinha.getjButtonPesquisarCPF()) {
-
             buscarCPF();
-
+            utilities.Utilities.turnCepTextFieldGray(this.cadastroCarteirinha.getjFormattedTextFieldCPF());
         }
 
+    }
+
+    public Cliente getEndByCpf(String cpf) {
+        Cliente teste = new Cliente();
+        for(Cliente clienteAtual : service.ClienteService.carregar()){
+            if (clienteAtual.getCpf().equals(cpf)) {
+                teste = clienteAtual;
+            }
+        }
+        return  teste;
+    }
+
+    public Cliente getEndByID(int idEnd) {
+        for (Cliente clienteAtual : service.ClienteService.carregar()) {
+            if (clienteAtual.getId() == idEnd) {
+                return clienteAtual;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -209,32 +240,22 @@ public class ControllerCadastroCarteirinha implements ActionListener, FocusListe
     @Override
     public void focusLost(FocusEvent e) {
         if (e.getSource() == this.cadastroCarteirinha.getjFormattedTextFieldCPF()) {
-            String CPF = this.cadastroCarteirinha.getjFormattedTextFieldCPF().getText().trim();
+            String CPF = (String) this.cadastroCarteirinha.getjFormattedTextFieldCPF().getText().trim();
+            System.out.println(CPF);
 
-            if (!CPF.isEmpty()) {
-                List<Cliente> listaClientes = ClienteService.carregar("cpf", CPF);
+            if (CPF.isEmpty()) {
+                this.cadastroCarteirinha.getjFormattedTextFieldCPF().setText("");
+                this.cadastroCarteirinha.getjTextFieldNome().setText("");
+            } else {
+                Cliente cliente = ClienteService.carregar("cpf", CPF).get(0);
 
-                if (!listaClientes.isEmpty()) {
-                    Cliente cliente = listaClientes.get(0);
-
+                if (cliente != null) {
                     this.cadastroCarteirinha.getjTextFieldNome().setText(cliente.getNome());
                 } else {
-                    this.cadastroCarteirinha.getjFormattedTextFieldCPF().setValue(null);
                     this.cadastroCarteirinha.getjTextFieldNome().setText("");
-
                 }
-
             }
         }
-    }
-
-    public Cliente getCPFByID(int idClient) {
-        for (Cliente clienteAtual : service.ClienteService.carregar()) {
-            if (clienteAtual.getId() == idClient) {
-                return clienteAtual;
-            }
-        }
-        return null;
     }
 
     private void buscarCPF() {
@@ -243,7 +264,8 @@ public class ControllerCadastroCarteirinha implements ActionListener, FocusListe
         buscaCliente.setVisible(true);
 
         if (ControllerCadastroCliente.codigo != 0) {
-            Cliente cliente = getCPFByID(ControllerCadastroCliente.codigo);
+            Cliente cliente = getEndByID(ControllerCadastroCliente.codigo);
+            this.cadastroCarteirinha.getjFormattedTextFieldCPF().setText(cliente.getCpf());
             this.cadastroCarteirinha.getjTextFieldNome().setText(cliente.getNome());
         }
     }

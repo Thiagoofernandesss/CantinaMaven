@@ -72,8 +72,10 @@ model\bo\Carteirinha.class
 view\CadastraEstoque$10.class
 controller\ControllerPDV.class
 view\CadastroCliente$9.class
+view\CadastroProduto$8.class
 controller\ControllerCadastroCidade.class
 view\CadastroCliente$10.class
+controller\ControllerCadastroCarteirinha$1.class
 controller\ControllerCadastroCompra.class
 view\CadastroCidade$1.class
 view\CadastroProduto$2.class

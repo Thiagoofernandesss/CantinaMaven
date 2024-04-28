@@ -65,7 +65,7 @@ public class CarteirinhaDao implements InterfaceDao<Carteirinha>{
     @Override
     public List<Carteirinha> retrieve() {
         List<Carteirinha> listaCarteirinhas;
-        listaCarteirinhas = entityManager.createQuery("select c From Carteirinha",Carteirinha.class).getResultList();
+        listaCarteirinhas = entityManager.createQuery("select c from Carteirinha c",Carteirinha.class).getResultList();
         return listaCarteirinhas;
     }
 
@@ -81,7 +81,7 @@ public class CarteirinhaDao implements InterfaceDao<Carteirinha>{
   
     public List<Carteirinha> retrieve(String nomeParametro, String parString) {
         List<Carteirinha> listaCarteirinhas;
-        listaCarteirinhas = entityManager.createQuery("Select c From Carteirinha c Where " + nomeParametro + "  like "
+        listaCarteirinhas = entityManager.createQuery("select c from Carteirinha c where c." + nomeParametro + "  like "
                 + ":parDescricao", Carteirinha.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
         return listaCarteirinhas;
     }

@@ -22,8 +22,7 @@ public class ControllerCadastroBairro implements ActionListener{
     FocusListener focus = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
-               
-            cadastroBairro.getjTextFieldDescricao().requestFocus();
+            Utilities.turnTextFieldGray(cadastroBairro.getjTextFieldDescricao());
         }
 
         @Override

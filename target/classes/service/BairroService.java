@@ -13,6 +13,7 @@ import model.bo.Bairro;
  * @author Thiago
  */
 public class BairroService {
+
     public static void adicionar(Bairro objeto) {
         BairroDao.getInstance().create(objeto);
         //BairroDao BairroDao = new BairroDao();
@@ -23,6 +24,11 @@ public class BairroService {
         return BairroDao.getInstance().retrieve();
         //BairroDao BairroDao = new BairroDao();
         //return BairroDao.retrieve();
+    }
+
+    public static List<Bairro> carregar(String nomeParametro, String parString) {
+        BairroDao bairroDao = new BairroDao();
+        return bairroDao.retrieve(nomeParametro, parString);
     }
 
     public static Bairro carregar(int parPK) {
@@ -42,10 +48,11 @@ public class BairroService {
         //BairroDao.update(objeto);
         BairroDao.getInstance().update(objeto);
     }
+
     public static void remover(Bairro objeto) {
         //BairroDao BairroDao = new BairroDao();
         //BairroDao.delete(objeto);
         BairroDao.getInstance().delete(objeto);
     }
-    
+
 }

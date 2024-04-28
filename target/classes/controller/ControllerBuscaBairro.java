@@ -28,9 +28,9 @@ public class ControllerBuscaBairro implements ActionListener {
         this.buscaBairro.getjButtonFiltrar().addActionListener(this);
         this.buscaBairro.getjButtonCarregar().addActionListener(this);
         this.buscaBairro.getjButtonSair().addActionListener(this);
-
-        //Teste Seguiindo proj. Rober
-        //utilities.Utilities.ativa(true, this.buscaBairro.getjPanelBotoes());
+        this.buscaBairro.getjComboBoxBuscaBairroPor().addActionListener(this);
+        this.buscaBairro.getjTextFieldFiltrar().addActionListener(this);
+        
     }
 
     @Override
@@ -48,39 +48,37 @@ public class ControllerBuscaBairro implements ActionListener {
                     tabela.addRow(new Object[]{
                         bairroAtual.getId(),
                         bairroAtual.getDescricao()
-
                     });
-
                 }
 
             } else {
                 List<Bairro> listaBairros = new ArrayList<Bairro>();
-                String buscaPor = this.buscaBairro.getjComboBoxBuscaBairroPor().getSelectedItem().toString();
-
-                if (this.buscaBairro.getjComboBoxBuscaBairroPor().getSelectedIndex() == 0) {
-                    listaBairros.add(BairroService.carregar(Integer.parseInt(this.buscaBairro.getjTextFieldFiltrar().getText())));
-
-                } else if (this.buscaBairro.getjComboBoxBuscaBairroPor().getSelectedIndex() == 1) {
-                    listaBairros = BairroService.carregar(this.buscaBairro.getjTextFieldFiltrar().getText().trim());
-
+                if ( this.buscaBairro.getjComboBoxBuscaBairroPor().getSelectedItem().toString().equalsIgnoreCase("id")) {
+                    try {
+                        int id = Integer.parseInt(filtro);
+                        listaBairros.add(service.BairroService.carregar(id));
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "O ID deve ser um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else if(this.buscaBairro.getjComboBoxBuscaBairroPor().getSelectedItem().toString().equalsIgnoreCase("descrição")){
+                    listaBairros = service.BairroService.carregar("descricao", this.buscaBairro.getjTextFieldFiltrar().getText());
+                }else{
+                    listaBairros = service.BairroService.carregar(this.buscaBairro.getjComboBoxBuscaBairroPor()
+                            .getSelectedItem().toString().trim().toLowerCase(), this.buscaBairro.getjTextFieldFiltrar().getText());
                 }
 
-                //Criando um objeto do tipo TableModel
-                tabela.setRowCount(0);
                 for (Bairro bairroAtual : listaBairros) {
-                    tabela.addRow(new Object[]{bairroAtual.getId(),
-                        bairroAtual.getDescricao()});
-
+                    tabela.addRow(new Object[]{
+                        bairroAtual.getId(),
+                        bairroAtual.getDescricao()
+                    });
                 }
-
             }
 
         } else if (e.getSource() == this.buscaBairro.getjButtonCarregar()) {
-
-            controller.ControllerCadastroBairro.codigo = (int) this.buscaBairro.
-                    getjTableDados().getValueAt(this.buscaBairro.getjTableDados().getSelectedRow(), 0);
-            controller.ControllerCadastroEndereco.codigo = (int) this.buscaBairro.
-                    getjTableDados().getValueAt(this.buscaBairro.getjTableDados().getSelectedRow(), 0);
+            controller.ControllerCadastroBairro.codigo = (int) this.buscaBairro.getjTableDados().
+                    getValueAt(this.buscaBairro.getjTableDados().getSelectedRow(), 0);
+            
             this.buscaBairro.dispose();
 
         } else if (e.getSource() == this.buscaBairro.getjButtonSair()) {

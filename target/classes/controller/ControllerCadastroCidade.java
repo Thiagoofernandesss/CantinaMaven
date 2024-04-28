@@ -41,9 +41,8 @@ public class ControllerCadastroCidade implements ActionListener {
     
     FocusListener focus = new FocusListener() {
         @Override
-        public void focusGained(FocusEvent e) {
-            
-            cadastroCidade.getjTextFieldDescricao().requestFocus();  
+        public void focusGained(FocusEvent e) {   
+            Utilities.turnTextFieldGray(cadastroCidade.getjTextFieldDescricao());
         }
 
         @Override
@@ -61,6 +60,7 @@ public class ControllerCadastroCidade implements ActionListener {
             utilities.Utilities.limpaComponentes(true, this.cadastroCidade.getjPanelDados());
             //Desligando o ID no braço (Provisório)
             this.cadastroCidade.getjTextFieldId().setEditable(false);
+            this.cadastroCidade.getjTextFieldDescricao().requestFocus();
 
         } else if (e.getSource() == this.cadastroCidade.getjButtonSair()) {
             this.cadastroCidade.dispose();

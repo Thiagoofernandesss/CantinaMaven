@@ -1,6 +1,4 @@
-
 package model.Dao;
-
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -54,7 +52,7 @@ public class BairroDao implements InterfaceDao<Bairro> {
     public List<Bairro> retrieve() {
         List<Bairro> listaBairros;
         listaBairros = entityManager.createQuery("select b From Bairro b", Bairro.class).getResultList();
-        return listaBairros;    
+        return listaBairros;
 
     }
 
@@ -72,11 +70,18 @@ public class BairroDao implements InterfaceDao<Bairro> {
         return listaBairros;
 
     }
+    
+    public List<Bairro> retrieve(String nomeParametro, String parString) {
+        List<Bairro> listaBairros;
+        listaBairros = entityManager.createQuery("select b from Bairro b where b." + nomeParametro + "  like "
+                + ":parDescricao", Bairro.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
+        return listaBairros;
+    }
 
     @Override
     public void update(Bairro objeto) {
         try {
-            Bairro bairro = entityManager.find(Bairro.class, objeto.getId());   
+            Bairro bairro = entityManager.find(Bairro.class, objeto.getId());
             entityManager.getTransaction().begin();
             entityManager.merge(objeto);
             entityManager.getTransaction().commit();
@@ -89,7 +94,7 @@ public class BairroDao implements InterfaceDao<Bairro> {
     @Override
     public void delete(Bairro objeto) {
         try {
-            Bairro bairro = entityManager.find(Bairro.class, objeto.getId());   
+            Bairro bairro = entityManager.find(Bairro.class, objeto.getId());
             entityManager.getTransaction().begin();
             entityManager.remove(objeto);
             entityManager.getTransaction().commit();
