@@ -42,8 +42,6 @@ public class Utilities {
 
         }
     }
-    
-    
 
     public static void limpaComponentes(boolean ativa, JPanel painel) {
         Component[] componentes = painel.getComponents();
@@ -53,155 +51,169 @@ public class Utilities {
                 ((JTextField) componente).setText("");
             } else if (componente instanceof JFormattedTextField) {
                 ((JFormattedTextField) componente).setText("");
-            } else if(componente instanceof JComboBox){
+            } else if (componente instanceof JComboBox) {
                 ((JComboBox) componente).setSelectedIndex(-1);
-            } else if (componente instanceof JTextArea){
-                ((JTextArea)componente).setText("");
-            } else if (componente instanceof JRadioButton){
+            } else if (componente instanceof JTextArea) {
+                ((JTextArea) componente).setText("");
+            } else if (componente instanceof JRadioButton) {
                 ((JRadioButton) componente).setSelected(ativa);
-            } else if(componente instanceof JCheckBox){
+            } else if (componente instanceof JCheckBox) {
                 ((JCheckBox) componente).setSelected((false));
             }
             componente.setEnabled(ativa);
         }
 
     }
-    
-    public static java.sql.Date stringToDate(String data){
-        
+
+    public static java.sql.Date stringToDate(String data) {
+
         java.sql.Date dataSQL = null;
 
-        
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             java.util.Date utilDate = sdf.parse(data);
-            
+
             dataSQL = new java.sql.Date(utilDate.getTime());
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
         return dataSQL;
-        
+
     }
-    
-    
-    public static boolean isDataEmpty(JTextField... campos){
-        
+
+    public static boolean isDataEmpty(JTextField... campos) {
+
         boolean verify = false;
         for (JTextField campo : campos) {
-            
-            if(campo.getText().equals("")||campo.getBackground().equals(new Color(248,199,197))){
-              campo.setBackground(new Color(248,199,197));
-              campo.setText("*Campo obrigatório*");
-              verify=true;
+
+            if (campo.getText().equals("") || campo.getBackground().equals(new Color(248, 199, 197))) {
+                campo.setBackground(new Color(248, 199, 197));
+                campo.setText("*Campo obrigatório*");
+                verify = true;
             }
-        }   
+        }
         return verify;
     }
-    
-        
-    
-    public static boolean isFormattedDataEmpty(JFormattedTextField... campos){
-        
+
+    public static boolean isFormattedDataEmpty(JFormattedTextField... campos) {
+
         boolean verify = false;
         for (JFormattedTextField campo : campos) {
-            
-            
-            if(campo.getValue()==null||campo.getBackground().equals(new Color(248,199,197))){
-              campo.setBackground(new Color(248,199,197));
-              campo.setText("*Campo obrigatório*");
-              verify=true;
+
+            if (campo.getValue() == null || campo.getBackground().equals(new Color(248, 199, 197))) {
+                campo.setBackground(new Color(248, 199, 197));
+                campo.setText("*Campo obrigatório*");
+                verify = true;
             }
-        }   
+        }
         return verify;
     }
-public static void turnTextFieldRed(JTextField textField){
-       if(textField.getText().trim().isEmpty()){
-           Color corErro = new Color(248,199,197); 
-           textField.setText("*Campo obrigatório*");
-           textField.setBackground(corErro);
-       }
-       
-       
+
+    public static void turnTextFieldRed(JTextField textField) {
+        if (textField.getText().trim().isEmpty()) {
+            Color corErro = new Color(248, 199, 197);
+            textField.setText("*Campo obrigatório*");
+            textField.setBackground(corErro);
+        }
+
     }
-    public static void turnTextFieldGray(JTextField textField){
-        Color corErro = new Color(255,255,255);
-        if(textField.getText().equalsIgnoreCase("*Campo obrigatório*")){
-                    textField.setText(null);
+
+    public static void turnTextFieldGray(JTextField textField) {
+        Color corErro = new Color(255, 255, 255);
+        if (textField.getText().equalsIgnoreCase("*Campo obrigatório*")) {
+            textField.setText(null);
 
         }
-        textField.setBackground(corErro);   
-       
+        textField.setBackground(corErro);
+
     }
     
-    public static void turnCepTextFieldRed(JFormattedTextField textField){
-        
-        String maskString=textField.getText();
-        
-       if(textField.getValue()==null){
-           Color corErro = new Color(248,199,197); 
-           textField.setText("*Campo obrigatório*");
-           textField.setBackground(corErro);
-       }
-       
+    public static void turnPriceTextFieldRed(JTextField textField) {
+        if (textField.getText().trim().isEmpty()) {
+            Color corErro = new Color(248, 199, 197);
+            textField.setText("*Obrigatório*");
+            textField.setBackground(corErro);
+        }
+
     }
-    public static void turnCepTextFieldGray(JFormattedTextField textField){
-        
-        
-        Color corErro = new Color(255,255,255);
-        if(textField.getText().equalsIgnoreCase("*Campo obrigatório*")){
+
+    public static void turnPriceTextFieldGray(JTextField textField) {
+        Color corErro = new Color(255, 255, 255);
+        if (textField.getText().equalsIgnoreCase("*Obrigatório*")) {
+            textField.setText(null);
+
+        }
+        textField.setBackground(corErro);
+
+    }
+
+    public static void turnCepTextFieldRed(JFormattedTextField textField) {
+
+        String maskString = textField.getText();
+
+        if (textField.getValue() == null) {
+            Color corErro = new Color(248, 199, 197);
+            textField.setText("*Campo obrigatório*");
+            textField.setBackground(corErro);
+        }
+
+    }
+
+    public static void turnCepTextFieldGray(JFormattedTextField textField) {
+
+        Color corErro = new Color(255, 255, 255);
+        if (textField.getText().equalsIgnoreCase("*Campo obrigatório*")) {
             textField.setValue(null);
         }
-        textField.setBackground(corErro);   
-        
+        textField.setBackground(corErro);
+
     }
-    
-    public static void turnCpfTextFieldRed(JFormattedTextField textField){
-        String maskString=textField.getText();
-        
-       if(textField.getValue()==null){
-           Color corErro = new Color(248,199,197); 
-           textField.setText("*Campo obrigatório*");
-           textField.setBackground(corErro);
-       }
-       
+
+    public static void turnCpfTextFieldRed(JFormattedTextField textField) {
+        String maskString = textField.getText();
+
+        if (textField.getValue() == null) {
+            Color corErro = new Color(248, 199, 197);
+            textField.setText("*Campo obrigatório*");
+            textField.setBackground(corErro);
+        }
+
     }
-    public static void turnDateTextFieldGray(JFormattedTextField textField){
-       Color corErro = new Color(255,255,255); 
-       if(textField.getText().equalsIgnoreCase("*Campo obrigatório*")){
-                    textField.setValue(null);
+
+    public static void turnDateTextFieldGray(JFormattedTextField textField) {
+        Color corErro = new Color(255, 255, 255);
+        if (textField.getText().equalsIgnoreCase("*Campo obrigatório*")) {
+            textField.setValue(null);
 
         }
-       textField.setBackground(corErro);
+        textField.setBackground(corErro);
     }
-    
-    public static void turnPhoneTextFieldRed(JFormattedTextField textField){
-       if(textField.getText().trim().isEmpty()){
-           Color corErro = new Color(248,199,197); 
-           textField.setText("*Campo obrigatório*");
-           textField.setBackground(corErro);
-       }
-       
+
+    public static void turnPhoneTextFieldRed(JFormattedTextField textField) {
+        if (textField.getText().trim().isEmpty()) {
+            Color corErro = new Color(248, 199, 197);
+            textField.setText("*Campo obrigatório*");
+            textField.setBackground(corErro);
+        }
+
     }
-    public static void turnPhoneTextFieldGray(JFormattedTextField textField){
-       Color corErro = new Color(255,255,255);
-       if(textField.getText().equalsIgnoreCase("*Campo obrigatório*")){
-                    textField.setValue(null);
+
+    public static void turnPhoneTextFieldGray(JFormattedTextField textField) {
+        Color corErro = new Color(255, 255, 255);
+        if (textField.getText().equalsIgnoreCase("*Campo obrigatório*")) {
+            textField.setValue(null);
 
         }
-       textField.setBackground(corErro);
+        textField.setBackground(corErro);
     }
-   
-   
-    
-    public static boolean isNumeric(String str){
-        try{
+
+    public static boolean isNumeric(String str) {
+        try {
             Integer.parseInt(str);
             return true;
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    
 }

@@ -28,6 +28,18 @@ public class ControllerCadastroFornecedor implements ActionListener, FocusListen
     private CadastroFornecedor cadastroFornecedor;
     public static int codigo;
     
+    FocusListener focusRazaoSocial = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            Utilities.turnTextFieldGray(cadastroFornecedor.getjTextFieldRazaoSocial());
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            Utilities.turnTextFieldRed(cadastroFornecedor.getjTextFieldRazaoSocial());
+        }
+    };
+    
     FocusListener focusCep = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
@@ -41,7 +53,7 @@ public class ControllerCadastroFornecedor implements ActionListener, FocusListen
         }
     };
     
-    FocusListener focusMatricula = new FocusListener() {
+    FocusListener focusInscEstadual = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
             Utilities.turnTextFieldGray(cadastroFornecedor.getjFormattedTextFieldInsEstadual());
@@ -53,7 +65,7 @@ public class ControllerCadastroFornecedor implements ActionListener, FocusListen
         }
     };
     
-    FocusListener focusCpf = new FocusListener() {
+    FocusListener focusCnpj = new FocusListener() {
         @Override
         public void focusGained(FocusEvent e) {
             Utilities.turnCepTextFieldGray(cadastroFornecedor.getjFormattedTextFieldCnpj());
@@ -75,9 +87,11 @@ public class ControllerCadastroFornecedor implements ActionListener, FocusListen
         this.cadastroFornecedor.getjButtonSalvar().addActionListener(this);
         this.cadastroFornecedor.getjButtonConsultar().addActionListener(this);
         
-        this.cadastroFornecedor.getjFormattedTextFieldCnpj().addFocusListener(focusCpf);
+        this.cadastroFornecedor.getjTextFieldRazaoSocial().addFocusListener(focusRazaoSocial);
+        this.cadastroFornecedor.getjFormattedTextFieldInsEstadual().addFocusListener(focusInscEstadual);
+        this.cadastroFornecedor.getjFormattedTextFieldCnpj().addFocusListener(focusCnpj);
         this.cadastroFornecedor.getjFormattedTextFieldCep().addFocusListener(focusCep);
-        this.cadastroFornecedor.getjFormattedTextFieldInsEstadual().addFocusListener(focusMatricula);
+        
 
         this.cadastroFornecedor.getjButtonPesquisarCep().addActionListener(this);
         this.cadastroFornecedor.getjButtonAdcionarCep().addActionListener(this);

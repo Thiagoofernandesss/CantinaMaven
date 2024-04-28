@@ -148,7 +148,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jTextFieldId.setEditable(false);
 
         jLabelDescricao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelDescricao.setText("Descrição");
+        jLabelDescricao.setText("Descrição*");
 
         jTextFieldDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +160,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jCheckBoxStatus.setText("Inativo");
 
         jLabelCodigoBarras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelCodigoBarras.setText("Cod. Barras");
+        jLabelCodigoBarras.setText("Cód. Barras*");
 
         try {
             jTextFieldCodigoBarras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("############")));
@@ -168,9 +168,14 @@ public class CadastroProduto extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jTextFieldCodigoBarras.setText("");
+        jTextFieldCodigoBarras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCodigoBarrasActionPerformed(evt);
+            }
+        });
 
         jLabelCodigoBarras1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelCodigoBarras1.setText("Preço R$");
+        jLabelCodigoBarras1.setText("Preço R$*");
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -373,9 +378,9 @@ public class CadastroProduto extends javax.swing.JFrame {
             .addGroup(jPanelFundoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 631, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelFundoLayout.setVerticalGroup(
@@ -432,6 +437,10 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void jTextFieldDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDescricaoActionPerformed
+
+    private void jTextFieldCodigoBarrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoBarrasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCodigoBarrasActionPerformed
 
     /**
      * @param args the command line arguments

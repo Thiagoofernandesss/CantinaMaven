@@ -13,6 +13,7 @@ import java.util.List;
 import model.bo.Endereco;
 import model.bo.Funcionario;
 import service.EnderecoService;
+import utilities.Utilities;
 import view.BuscaEndereco;
 import view.BuscaFuncionario;
 import view.CadastroEndereco;
@@ -27,6 +28,66 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
     CadastroFuncionario cadastroFuncionario;
     public static int codigo;
 
+    FocusListener focusUser = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            Utilities.turnTextFieldGray(cadastroFuncionario.getjTextFieldUsuario());
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            Utilities.turnTextFieldRed(cadastroFuncionario.getjTextFieldUsuario());
+        }
+    };
+
+    FocusListener focusPassword = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            Utilities.turnTextFieldGray(cadastroFuncionario.getjPasswordFieldSenhaUsuario());
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            Utilities.turnTextFieldRed(cadastroFuncionario.getjPasswordFieldSenhaUsuario());
+        }
+    };
+
+    FocusListener focusCep = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            Utilities.turnCepTextFieldGray(cadastroFuncionario.getjFormattedTextFieldCEP());
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            Utilities.turnCepTextFieldRed(cadastroFuncionario.getjFormattedTextFieldCEP());
+
+        }
+    };
+
+    FocusListener focusCpf = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            Utilities.turnCepTextFieldGray(cadastroFuncionario.getjFormattedTextFieldCPF());
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            Utilities.turnCpfTextFieldRed(cadastroFuncionario.getjFormattedTextFieldCPF());
+        }
+    };
+
+    FocusListener focusNome = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            Utilities.turnTextFieldGray(cadastroFuncionario.getjTextFieldNome());
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            Utilities.turnTextFieldRed(cadastroFuncionario.getjTextFieldNome());
+        }
+    };
 
     public ControllerCadastroFuncionario(CadastroFuncionario cadastroFuncionario) {
         this.cadastroFuncionario = cadastroFuncionario;
@@ -36,17 +97,23 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
         this.cadastroFuncionario.getjButtonCancelar().addActionListener(this);
         this.cadastroFuncionario.getjButtonSalvar().addActionListener(this);
         this.cadastroFuncionario.getjButtonConsultar().addActionListener(this);
-        
+
         this.cadastroFuncionario.getjButtonAdicionarCep().addActionListener(this);
         this.cadastroFuncionario.getjButtonPesquisarCep().addActionListener(this);
-        
+
+        this.cadastroFuncionario.getjFormattedTextFieldCEP().addFocusListener(focusCep);
+        this.cadastroFuncionario.getjTextFieldNome().addFocusListener(focusNome);
+        this.cadastroFuncionario.getjFormattedTextFieldCPF().addFocusListener(focusCpf);
+        this.cadastroFuncionario.getjTextFieldUsuario().addFocusListener(focusUser);
+        this.cadastroFuncionario.getjPasswordFieldSenhaUsuario().addFocusListener(focusPassword);
+
         List<Endereco> listaEnderecos = new ArrayList<>();
-        
+
         listaEnderecos = service.EnderecoService.carregar();
-        
+
         //Adicionando os listeners ao campo de cep
         this.cadastroFuncionario.getjFormattedTextFieldCEP().addFocusListener(this);
-        
+
         // Habilitando os botões e desabilitando os campos do formulário
         utilities.Utilities.ativa(true, this.cadastroFuncionario.getjPanelBotoes());
         utilities.Utilities.limpaComponentes(false, this.cadastroFuncionario.getjPanelDados());
@@ -54,13 +121,12 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-         if (e.getSource() == this.cadastroFuncionario.getjButtonNovo()) {
+        if (e.getSource() == this.cadastroFuncionario.getjButtonNovo()) {
             utilities.Utilities.ativa(false, this.cadastroFuncionario.getjPanelBotoes());
             utilities.Utilities.limpaComponentes(true, this.cadastroFuncionario.getjPanelDados());
-             
-            
+
             this.cadastroFuncionario.getjTextFieldID().setEditable(false);
-            
+
             //Desligando os campos de descrições da cidade, do bairro e logradouro
             this.cadastroFuncionario.getjTextFieldCidade().setEditable(false);
             this.cadastroFuncionario.getjTextFieldBairro().setEditable(false);
@@ -76,7 +142,7 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
 
         } else if (e.getSource() == this.cadastroFuncionario.getjButtonSalvar()) {
             Funcionario funcionario = new Funcionario();
-             
+
             funcionario.setNome(this.cadastroFuncionario.getjTextFieldNome().getText());
             funcionario.setFone1(this.cadastroFuncionario.getjFormattedTextFieldFone1().getText());
             funcionario.setFone2(this.cadastroFuncionario.getjFormattedTextFieldFone2().getText());
@@ -88,11 +154,11 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
             funcionario.setComplementoEndereco(this.cadastroFuncionario.getjTextFieldComplementoEndereco().getText());
             funcionario.setUsuario(this.cadastroFuncionario.getjTextFieldUsuario().getText());
             funcionario.setSenha(this.cadastroFuncionario.getjPasswordFieldSenhaUsuario().getText());
-            
-            Endereco endereco = EnderecoService.carregar("cep",this.cadastroFuncionario.getjFormattedTextFieldCEP().getText()).get(0);
-            
+
+            Endereco endereco = EnderecoService.carregar("cep", this.cadastroFuncionario.getjFormattedTextFieldCEP().getText()).get(0);
+
             funcionario.setEndereco(endereco);
-            
+
             if (codigo == 0) {
                 service.FuncionarioService.adicionar(funcionario);
                 utilities.Utilities.ativa(true, this.cadastroFuncionario.getjPanelBotoes());
@@ -119,14 +185,14 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
                 this.cadastroFuncionario.getjTextFieldLogradouro().setEditable(false);
 
             }
-            
+
         } else if (e.getSource() == this.cadastroFuncionario.getjButtonConsultar()) {
             codigo = 0;
             BuscaFuncionario buscaFuncionario = new BuscaFuncionario(null, true);
             ControllerBuscaFuncionario controllerBuscaFuncionario = new ControllerBuscaFuncionario(buscaFuncionario);
             buscaFuncionario.setVisible(true);
-            
-             if (codigo != 0) {
+
+            if (codigo != 0) {
 
                 utilities.Utilities.ativa(false, cadastroFuncionario.getjPanelBotoes());
                 utilities.Utilities.limpaComponentes(true, cadastroFuncionario.getjPanelDados());
@@ -145,7 +211,6 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
                 this.cadastroFuncionario.getjTextFieldUsuario().setText(funcionario.getUsuario() + "");
                 this.cadastroFuncionario.getjPasswordFieldSenhaUsuario().setText(funcionario.getSenha() + "");
 
-
                 this.cadastroFuncionario.getjTextFieldLogradouro().setText(funcionario.getEndereco().getLogradouro() + "");
                 this.cadastroFuncionario.getjTextFieldBairro().setText(funcionario.getEndereco().getBairro().getDescricao() + "");
                 this.cadastroFuncionario.getjTextFieldCidade().setText(funcionario.getEndereco().getCidade().getDescricao() + "");
@@ -161,23 +226,22 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
                 this.cadastroFuncionario.getjTextFieldBairro().setEditable(false);
                 this.cadastroFuncionario.getjTextFieldLogradouro().setEditable(false);
             }
-             
-        } else if (e.getSource() == this.cadastroFuncionario.getjButtonPesquisarCep()){
-              buscarCep();
-                
-        } else if (e.getSource() == this.cadastroFuncionario.getjButtonAdicionarCep()){
-             CadastroEndereco cadastroEndereco = new CadastroEndereco();
-             ControllerCadastroEndereco controllerCadastroEndereco = new ControllerCadastroEndereco(cadastroEndereco);
-             cadastroEndereco.setVisible(true);
+
+        } else if (e.getSource() == this.cadastroFuncionario.getjButtonPesquisarCep()) {
+            buscarCep();
+
+        } else if (e.getSource() == this.cadastroFuncionario.getjButtonAdicionarCep()) {
+            CadastroEndereco cadastroEndereco = new CadastroEndereco();
+            ControllerCadastroEndereco controllerCadastroEndereco = new ControllerCadastroEndereco(cadastroEndereco);
+            cadastroEndereco.setVisible(true);
         }
     }
 
-    
     public Endereco getEndByCep(String cep) {
         Endereco teste = new Endereco();
         for (Endereco enderecoAtual : service.EnderecoService.carregar()) {
             if (enderecoAtual.getCep().equals(cep)) {
-                teste= enderecoAtual;
+                teste = enderecoAtual;
             }
         }
         return teste;
@@ -192,8 +256,7 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
         }
         return null;
     }
-    
-    
+
     @Override
     public void focusGained(FocusEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -209,7 +272,7 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
                 this.cadastroFuncionario.getjTextFieldBairro().setText("");
                 this.cadastroFuncionario.getjTextFieldLogradouro().setText("");
             } else {
-                Endereco endereco = EnderecoService.carregar("cep",codigoCEP).get(0);
+                Endereco endereco = EnderecoService.carregar("cep", codigoCEP).get(0);
 
                 if (endereco != null) {
                     this.cadastroFuncionario.getjTextFieldCidade().setText(endereco.getCidade().getDescricao());
@@ -219,12 +282,12 @@ public class ControllerCadastroFuncionario implements ActionListener, FocusListe
                     this.cadastroFuncionario.getjTextFieldCidade().setText("");
                     this.cadastroFuncionario.getjTextFieldBairro().setText("");
                     this.cadastroFuncionario.getjTextFieldLogradouro().setText("");
-                    
 
                 }
             }
         }
     }
+
     private void buscarCep() {
         BuscaEndereco buscaEndereco = new BuscaEndereco(null, true);
         ControllerBuscaEndereco controllerBuscaEndereco = new ControllerBuscaEndereco(buscaEndereco);

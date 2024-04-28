@@ -239,7 +239,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CadastroFuncionario");
-        setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setFocusTraversalPolicyProvider(true);
         setResizable(false);
@@ -266,7 +265,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         jLabelNome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelNome.setText("Nome");
+        jLabelNome.setText("Nome*");
         jLabelNome.setMaximumSize(new java.awt.Dimension(13, 10));
         jLabelNome.setMinimumSize(new java.awt.Dimension(13, 10));
 
@@ -281,7 +280,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         jLabelCPF.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelCPF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelCPF.setText("CPF");
+        jLabelCPF.setText("CPF*");
         jLabelCPF.setMaximumSize(new java.awt.Dimension(13, 10));
         jLabelCPF.setMinimumSize(new java.awt.Dimension(13, 10));
 
@@ -338,7 +337,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         jLabelCep.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelCep.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelCep.setText("CEP");
+        jLabelCep.setText("CEP*");
         jLabelCep.setMaximumSize(new java.awt.Dimension(13, 10));
         jLabelCep.setMinimumSize(new java.awt.Dimension(13, 10));
 
@@ -395,10 +394,10 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         jLabelUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelUsuario.setText("Usuário");
+        jLabelUsuario.setText("Usuário*");
 
         jLabelSenha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelSenha.setText("Senha");
+        jLabelSenha.setText("Senha*");
 
         jLabelEmail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelEmail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

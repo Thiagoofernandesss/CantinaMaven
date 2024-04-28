@@ -15,6 +15,7 @@ view\CadastraEstoque$6.class
 view\BuscaEndereco$2.class
 view\CadastroEndereco$2.class
 view\MenuPrincipal$2.class
+controller\ControllerCadastroFuncionario$3.class
 view\BuscaCarteirinha$1.class
 view\PontoVenda$4.class
 model\bo\Produto_.class
@@ -41,6 +42,7 @@ view\CadastroVenda$7.class
 view\BuscaBairro$2.class
 view\CadastroFuncionario$6.class
 view\CadastroBairro$4.class
+controller\ControllerCadastroFornecedor$4.class
 model\bo\MovimentacaoEstoque.class
 view\BuscaCidade.class
 view\CadastroCidade$2.class
@@ -99,12 +101,14 @@ Dao\ClasseDados.class
 view\BuscaCidade$1.class
 view\TemplateBusca$2.class
 view\CadastroBairro.class
+controller\ControllerCadastroProduto$2.class
 model\bo\Cidade.class
 view\MenuPrincipal$13.class
 model\bo\ItemVenda_.class
 view\CadastroProduto$7.class
 view\CadastroCliente$11.class
 view\PontoVenda$5.class
+controller\ControllerCadastroProduto$1.class
 view\CadastroEndereco$1.class
 view\CadastroProduto$1.class
 view\TemplateCadastro.class
@@ -176,6 +180,7 @@ view\CadastraEstoque$7.class
 view\BuscaEndereco.class
 controller\ControllerBuscaBairro.class
 view\CadastroFuncionario$12.class
+controller\ControllerCadastroFuncionario$4.class
 view\CadastroFornecedor$7.class
 controller\ControllerCadastroFornecedor.class
 view\BuscaCompra$1.class
@@ -205,6 +210,8 @@ view\CadastroCidade$5.class
 controller\ControllerBuscaCaixa.class
 view\BuscaFuncionario$3.class
 controller\ControllerCadastroCliente$4.class
+controller\ControllerCadastroProduto$3.class
+controller\ControllerCadastroFuncionario$2.class
 view\MenuPrincipal$1.class
 view\MenuPrincipal$10.class
 model\bo\Bairro.class
@@ -231,6 +238,7 @@ view\CadastroBairro$3.class
 view\CadastroCaixa$6.class
 view\CadastroFornecedor$5.class
 view\BuscaProduto$1$1.class
+controller\ControllerCadastroFuncionario$1.class
 model\Dao\InterfaceDao.class
 view\BuscaCidade$3$1.class
 view\CadastroCliente$3.class
@@ -284,6 +292,7 @@ view\CadastroCaixa$7.class
 model\bo\Carteirinha_.class
 controller\ControllerPDV$3.class
 view\CadastraEstoque.class
+controller\ControllerCadastroFuncionario$5.class
 controller\ControllerBuscaProduto.class
 view\CadastroBairro$8.class
 view\CadastroCliente$1.class
