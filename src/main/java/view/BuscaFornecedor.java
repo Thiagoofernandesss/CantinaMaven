@@ -99,6 +99,7 @@ public class BuscaFornecedor extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("BuscaFornecedor");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         jPanelFundo.setBackground(new java.awt.Color(147, 216, 67));
