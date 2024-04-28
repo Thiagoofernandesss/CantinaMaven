@@ -248,7 +248,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
 
         jLabelRazaoSocial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelRazaoSocial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelRazaoSocial.setText("Razão Social");
+        jLabelRazaoSocial.setText("Razão Social*");
 
         jLabelNomeFantasia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelNomeFantasia.setText("Nome Fantasia");
@@ -258,11 +258,11 @@ public class CadastroFornecedor extends javax.swing.JFrame {
 
         jLabelInscricaoEstadual.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelInscricaoEstadual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelInscricaoEstadual.setText("Ins. Estadual");
+        jLabelInscricaoEstadual.setText("Ins. Estadual*");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CNPJ");
+        jLabel1.setText("CNPJ*");
 
         try {
             jFormattedTextFieldCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
@@ -288,7 +288,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
 
         jLabelCep.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelCep.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelCep.setText("CEP");
+        jLabelCep.setText("CEP*");
 
         try {
             jFormattedTextFieldCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -334,7 +334,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
 
         jLabelComplementoEndereco.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelComplementoEndereco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelComplementoEndereco.setText("Compl.");
+        jLabelComplementoEndereco.setText("Complemento");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -345,7 +345,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         jLabel3.setText("Fone");
 
         try {
-            jFormattedTextFieldInsEstadual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##############")));
+            jFormattedTextFieldInsEstadual.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -378,16 +378,14 @@ public class CadastroFornecedor extends javax.swing.JFrame {
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jTextFieldLogradouro, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                                     .addComponent(jTextFieldCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelComplementoEndereco))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabelBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabelComplementoEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldComplementoEndereco)))
+                                    .addComponent(jTextFieldComplementoEndereco)
+                                    .addComponent(jTextFieldBairro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -414,7 +412,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
                                     .addComponent(jFormattedTextFieldFone1)
                                     .addComponent(jFormattedTextFieldFone2)
                                     .addComponent(jFormattedTextFieldCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(jFormattedTextFieldInsEstadual, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))))
+                                    .addComponent(jFormattedTextFieldInsEstadual))))
                         .addGap(85, 85, 85))))
         );
         jPanelDadosLayout.setVerticalGroup(
@@ -600,7 +598,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
             .addGroup(jPanelTituloLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanelTituloLayout.setVerticalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -615,21 +613,21 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         jPanelFundoLayout.setHorizontalGroup(
             jPanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFundoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanelDados, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanelFundoLayout.setVerticalGroup(
             jPanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFundoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -638,11 +636,11 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 631, Short.MAX_VALUE)
+            .addComponent(jPanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 652, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 447, Short.MAX_VALUE)
         );
 
         pack();

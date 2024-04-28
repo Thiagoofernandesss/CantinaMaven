@@ -6,7 +6,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import model.bo.Bairro;
 import model.bo.Cidade;
 
-@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-28T01:09:47")
+@Generated(value="EclipseLink-2.7.12.v20230209-rNA", date="2024-04-28T01:31:35")
 @StaticMetamodel(Endereco.class)
 public class Endereco_ { 
 

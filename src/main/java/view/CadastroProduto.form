@@ -68,7 +68,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jPanelTitulo" max="32767" attributes="0"/>
                       <Component id="jPanelDados" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPanelBotoes" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jPanelBotoes" alignment="0" pref="631" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -192,7 +192,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldDescricao">
@@ -213,7 +213,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cod. Barras"/>
+                <Property name="text" type="java.lang.String" value="C&#xf3;d. Barras*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jTextFieldCodigoBarras">
@@ -235,7 +235,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Pre&#xe7;o R$"/>
+                <Property name="text" type="java.lang.String" value="Pre&#xe7;o R$*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldPreco">

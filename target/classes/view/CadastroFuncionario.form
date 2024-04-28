@@ -289,7 +289,7 @@
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Nome"/>
+                <Property name="text" type="java.lang.String" value="Nome*"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[13, 10]"/>
                 </Property>
@@ -320,7 +320,7 @@
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="CPF"/>
+                <Property name="text" type="java.lang.String" value="CPF*"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[13, 10]"/>
                 </Property>
@@ -415,7 +415,7 @@
                   <Font name="Tahoma" size="11" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="CEP"/>
+                <Property name="text" type="java.lang.String" value="CEP*"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[13, 10]"/>
                 </Property>
@@ -525,7 +525,7 @@
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+                <Property name="text" type="java.lang.String" value="Usu&#xe1;rio*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldUsuario">
@@ -535,7 +535,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Senha"/>
+                <Property name="text" type="java.lang.String" value="Senha*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordFieldSenhaUsuario">

@@ -163,7 +163,7 @@ public class CadastroEndereco extends javax.swing.JFrame {
 
         jLabelCep.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelCep.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelCep.setText("CEP");
+        jLabelCep.setText("CEP*");
         jLabelCep.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         try {
@@ -178,7 +178,7 @@ public class CadastroEndereco extends javax.swing.JFrame {
         });
 
         jLabelLogradouro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabelLogradouro.setText("Logradouro");
+        jLabelLogradouro.setText("Logradouro*");
 
         jLabelCidade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelCidade.setText("Cidade");
