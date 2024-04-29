@@ -74,7 +74,7 @@ public class CaixaDao implements InterfaceDao<Caixa>{
     
     public List<Caixa> retrieve(String nomeParametro, String parString) {
         List<Caixa> listaCaixas;
-        listaCaixas = entityManager.createQuery("Select c From Caixa c Where " + nomeParametro + "  like "
+        listaCaixas = entityManager.createQuery("Select c From Caixa c Where c." + nomeParametro + "  like "
                 + ":parDescricao", Caixa.class).setParameter("parDescricao", "%" + parString + "%").getResultList();
         return listaCaixas;
     }

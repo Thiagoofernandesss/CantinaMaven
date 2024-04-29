@@ -241,6 +241,7 @@ view\BuscaCidade$3$1.class
 view\CadastroCliente$3.class
 view\TemplateBusca$2$1.class
 view\BuscaVenda$2$1.class
+view\CadastroCaixa$12.class
 view\CadastroVenda$3.class
 view\BuscaCaixa$2.class
 view\CadastraEstoque$9.class
@@ -261,6 +262,7 @@ view\CadastroVenda$2.class
 service\BairroService.class
 view\BuscaCaixa$3.class
 controller\ControllerPDV$2.class
+view\CadastroCaixa$11.class
 controller\ControllerCadastroFornecedor$2.class
 model\Dao\CaixaDao.class
 model\Dao\CarteirinhaDao.class

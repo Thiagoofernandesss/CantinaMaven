@@ -51,10 +51,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jPanelDados" alignment="0" pref="605" max="32767" attributes="0"/>
-                      <Component id="jPanelBotoes" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPanelTitulo" alignment="1" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jPanelTitulo" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jPanelBotoes" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanelDados" alignment="0" min="-2" pref="599" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -65,9 +67,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanelTitulo" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="jPanelDados" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jPanelBotoes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -92,7 +94,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelTitulo" max="32767" attributes="0"/>
+                      <Component id="jLabelTitulo" pref="589" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -141,60 +143,68 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabelDataFechamento" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDataAbertura" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jFTFDataAbertura2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFTFDataFechamento2" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelObservacao" alignment="0" min="-2" pref="580" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldObservacao" alignment="0" min="-2" pref="519" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Component id="jLabelSaldoFinal" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabelSaldoInicial" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jFTFTSaldoInicial" min="-2" pref="81" max="-2" attributes="0"/>
+                                  <Component id="jFTFSaldoFinal" min="-2" pref="81" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabelDataFechamento" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelDataAbertura" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="jLabelNomeFuncionario" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelNumCaixa" min="-2" pref="61" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jTextFieldFiltrarFuncionario" pref="337" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Component id="jButtonPesquisarFuncionario" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jFTFDataAbertura" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jFTFDataFechamento" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabelSaldoInicial" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelSaldoFinal" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jFTFTSaldoInicial" min="-2" pref="81" max="-2" attributes="0"/>
-                                          <Component id="jFTFSaldoFinal" min="-2" pref="81" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jButtonAdicionarFuncionario" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabelNomeFuncionario" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jTextFieldFiltrarFuncionario" min="-2" pref="360" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Component id="jButtonPesquisarFuncionario" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jButtonAdicionarFuncionario" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabelNumCaixa" min="-2" pref="61" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldNumCaixa" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jCheckBoxStatusCaixa" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jTextFieldNumCaixa" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="jFTFDataAbertura" min="-2" pref="105" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jFTFDataFechamento" min="-2" pref="105" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jCheckBoxStatusCaixa" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelObservacao" min="-2" pref="580" max="-2" attributes="0"/>
+                          <Component id="jTextFieldObservacao" min="-2" pref="519" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -206,6 +216,8 @@
                           <Component id="jLabelNumCaixa" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldNumCaixa" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jCheckBoxStatusCaixa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFTFDataAbertura" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFTFDataFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -217,14 +229,14 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelDataAbertura" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFTFDataAbertura" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFTFDataAbertura2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelSaldoInicial" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jFTFTSaldoInicial" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelDataFechamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFTFDataFechamento" alignment="3" max="-2" attributes="0"/>
+                          <Component id="jFTFDataFechamento2" alignment="3" max="-2" attributes="0"/>
                           <Component id="jLabelSaldoFinal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jFTFSaldoFinal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -300,10 +312,10 @@
                 <Property name="text" type="java.lang.String" value="Data e Hora da Abertura:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFTFDataAbertura">
+            <Component class="javax.swing.JFormattedTextField" name="jFTFDataAbertura2">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##/##/####" subtype="-1" type="5"/>
+                  <Format format="##/##/#### ##:##:##" subtype="-1" type="5"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Text Cursor"/>
@@ -321,10 +333,10 @@
                 <Property name="text" type="java.lang.String" value="Data e Hora da Fechamento:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFTFDataFechamento">
+            <Component class="javax.swing.JFormattedTextField" name="jFTFDataFechamento2">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##/##/####" subtype="-1" type="5"/>
+                  <Format format="##/##/#### ##:##:##" subtype="-1" type="5"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Text Cursor"/>
@@ -375,6 +387,16 @@
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="jFTFDataAbertura">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFTFDataAberturaActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jFTFDataFechamento">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFTFDataFechamentoActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelBotoes">
@@ -397,7 +419,7 @@
                       <Component id="jButtonSair" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonCancelar" min="-2" pref="113" max="-2" attributes="0"/>
-                      <EmptySpace pref="52" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonConsultar" min="-2" pref="113" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jButtonNovo" min="-2" max="-2" attributes="0"/>

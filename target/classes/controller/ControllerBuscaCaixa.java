@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bo.Caixa;
 import view.BuscaCaixa;
@@ -16,10 +17,10 @@ import view.BuscaCaixa;
  *
  * @author gabri
  */
-public class ControllerBuscaCaixa implements ActionListener{
-    
+public class ControllerBuscaCaixa implements ActionListener {
+
     BuscaCaixa buscaCaixa;
-    
+
     public ControllerBuscaCaixa(BuscaCaixa buscaCaixa) {
         this.buscaCaixa = buscaCaixa;
         this.buscaCaixa.getjButtonFiltrar().addActionListener(this);
@@ -43,46 +44,53 @@ public class ControllerBuscaCaixa implements ActionListener{
                 List<Caixa> listaCaixa = service.CaixaService.carregar();
                 for (Caixa caixaAtual : listaCaixa) {
                     tabela.addRow(new Object[]{
-                    caixaAtual.getId(),
-                    caixaAtual.getObservaccao(),
-                    caixaAtual.getFuncionario(),
-                    caixaAtual.getStatus()
-                });
-            }
-        } else {
-            // Se houver texto no campo de filtro, realiza a busca com base no critério selecionado
-            String buscaPor = this.buscaCaixa.getjComboBoxBuscaCaixaPor().getSelectedItem().toString().toLowerCase();
-
-            List<Caixa> listaCaixa;
-
-            if (buscaPor.equals("id")) {
-                listaCaixa = new ArrayList<>();
-                Caixa caixa = service.CaixaService.carregar(Integer.parseInt(filtro));
-                if (caixa != null) {
-                    listaCaixa.add(caixa);
+                        caixaAtual.getId(),
+                        caixaAtual.getDataHoraAbertura(),
+                        caixaAtual.getFuncionario().getNome(),
+                        caixaAtual.getObservaccao(),
+                        caixaAtual.getStatus()
+                    });
                 }
-            } else if (buscaPor.equals("observação")) {
-                listaCaixa = service.CaixaService.carregar("observacao", filtro);
             } else {
-                listaCaixa = service.CaixaService.carregar(buscaPor, filtro);
-            }
+                // Se houver texto no campo de filtro, realiza a busca com base no critério selecionado
+                List<Caixa> listaCaixa = new ArrayList<>();
 
-            for(Caixa caixaAtual : listaCaixa) {
-                tabela.addRow(new Object[]{
-                caixaAtual.getId(),
-                caixaAtual.getObservaccao(),
-                caixaAtual.getFuncionario(),
-                caixaAtual.getStatus()
-            });
-        }
-    }
-    }else if (e.getSource() == this.buscaCaixa.getjButtonCarregar()) {
-            controller.ControllerCadastroCliente.codigo = (int) this.buscaCaixa.getjTableDados().
+                if (this.buscaCaixa.getjComboBoxBuscaCaixaPor().getSelectedItem().toString().equalsIgnoreCase("id")) {
+                    try {
+                        int id = Integer.parseInt(filtro);
+                        listaCaixa.add(service.CaixaService.carregar(id));
+
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "O ID deve ser um número válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+
+                    }
+                } else if (this.buscaCaixa.getjComboBoxBuscaCaixaPor().getSelectedItem().toString().equalsIgnoreCase("observação")) {
+                    listaCaixa = service.CaixaService.carregar("observacao", this.buscaCaixa.getjTextFieldFiltrar().getText());
+                } else if (this.buscaCaixa.getjComboBoxBuscaCaixaPor().getSelectedItem().toString().equalsIgnoreCase("status")) {
+                    listaCaixa = service.CaixaService.carregar("status", this.buscaCaixa.getjTextFieldFiltrar().getText());
+                } else {
+                    listaCaixa = service.CaixaService.carregar(this.buscaCaixa.getjComboBoxBuscaCaixaPor().getSelectedItem().toString().trim().toLowerCase(),
+                            this.buscaCaixa.getjTextFieldFiltrar().getText());
+                }
+
+                for (Caixa caixaAtual : listaCaixa) {
+                    tabela.addRow(new Object[]{
+                        caixaAtual.getId(),
+                        caixaAtual.getDataHoraAbertura(),
+                        caixaAtual.getFuncionario().getNome(),
+                        caixaAtual.getObservaccao(),
+                        caixaAtual.getStatus()
+                    });
+                }
+            }
+        } else if (e.getSource() == this.buscaCaixa.getjButtonCarregar()) {
+            controller.ControllerCadastraCaixa.codigo = (int) this.buscaCaixa.getjTableDados().
                     getValueAt(this.buscaCaixa.getjTableDados().getSelectedRow(), 0);
 
             this.buscaCaixa.dispose();
 
-        } else if (e.getSource() == this.buscaCaixa.getjButtonSair()) {
+        } else if (e.getSource()
+                == this.buscaCaixa.getjButtonSair()) {
             this.buscaCaixa.dispose();
 
         }

@@ -221,11 +221,11 @@ public class BuscaCaixa extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "Observação", "Funcionário", "Status"
+                "ID", "Data de abertura", "Funcionário", "Observação", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -235,9 +235,9 @@ public class BuscaCaixa extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setPreferredWidth(12);
-            jTableDados.getColumnModel().getColumn(1).setPreferredWidth(200);
             jTableDados.getColumnModel().getColumn(2).setPreferredWidth(200);
-            jTableDados.getColumnModel().getColumn(3).setPreferredWidth(20);
+            jTableDados.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTableDados.getColumnModel().getColumn(4).setPreferredWidth(20);
         }
 
         javax.swing.GroupLayout jPanelDados2Layout = new javax.swing.GroupLayout(jPanelDados2);

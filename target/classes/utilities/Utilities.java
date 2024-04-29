@@ -7,8 +7,10 @@ package utilities;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -127,7 +129,7 @@ public class Utilities {
         textField.setBackground(corErro);
 
     }
-    
+
     public static void turnPriceTextFieldRed(JTextField textField) {
         if (textField.getText().trim().isEmpty()) {
             Color corErro = new Color(248, 199, 197);
@@ -214,6 +216,17 @@ public class Utilities {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static Timestamp stringToTimestamp(String dataString) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date parsedDate = dateFormat.parse(dataString);
+        return new Timestamp(parsedDate.getTime());
+    }
+
+    public static String formatToDateTime(Timestamp timestamp) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(timestamp);
     }
 
 }

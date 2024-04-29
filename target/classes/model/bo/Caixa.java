@@ -5,6 +5,7 @@
 package model.bo;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.persistence.Column;
@@ -27,27 +28,25 @@ public class Caixa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @Column
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dataHoraAbertura;
-    
+    private Timestamp dataHoraAbertura;
+
     @Column
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dataHoraFechamento;
-    
+    private Timestamp dataHoraFechamento;
+
     @Column
     private float valorAbertura;
-    
+
     @Column
     private float valorFechamento;
-    
+
     @Column
     private String observacao;
-    
+
     @Column
     private char status;
-    
+
     @JoinColumn
     @ManyToOne
     private Funcionario funcionario;
@@ -55,7 +54,7 @@ public class Caixa implements Serializable {
     public Caixa() {
     }
 
-    public Caixa(int id, Date dataHoraAbertura, Date dataHoraFechamento, float valorAbertura, float valorFechamento, String observaccao, char status, Funcionario funcionario) {
+    public Caixa(int id, Timestamp dataHoraAbertura, Timestamp dataHoraFechamento, float valorAbertura, float valorFechamento, String observaccao, char status, Funcionario funcionario) {
         this.id = id;
         this.dataHoraAbertura = dataHoraAbertura;
         this.dataHoraFechamento = dataHoraFechamento;
@@ -70,7 +69,7 @@ public class Caixa implements Serializable {
         return dataHoraAbertura;
     }
 
-    public void setDataHoraAbertura(Date dataHoraAbertura) {
+    public void setDataHoraAbertura(Timestamp dataHoraAbertura) {
         this.dataHoraAbertura = dataHoraAbertura;
     }
 
@@ -82,12 +81,9 @@ public class Caixa implements Serializable {
         this.funcionario = funcionario;
     }
 
-
-
     public int getId() {
         return id;
     }
-
 
     public Date getDataHoraFechamento() {
         return dataHoraFechamento;
@@ -113,7 +109,7 @@ public class Caixa implements Serializable {
         this.id = id;
     }
 
-    public void setDataHoraFechamento(Date dataHoraFechamento) {
+    public void setDataHoraFechamento(Timestamp dataHoraFechamento) {
         this.dataHoraFechamento = dataHoraFechamento;
     }
 
@@ -132,27 +128,35 @@ public class Caixa implements Serializable {
     public void setStatus(char status) {
         this.status = status;
     }
-    
+
     public void setStatu(boolean statusInformado) {
-        if(statusInformado == false){
+        if (statusInformado == false) {
             this.status = 'A';
-        } else{
-            this.status = 'I';
+        } else {
+            this.status = 'F';
+        }
+
     }
-        
-   }
 
     @Override
     public String toString() {
-        return this.getId() + ", " 
-                + this.getDataHoraAbertura() + ", " 
-                + this.getDataHoraFechamento() + ", " 
-                + this.getValorAbertura() + ", " 
-                + this.getValorFechamento() + ", " 
-                + this.getObservaccao() + ", " 
+        return this.getId() + ", "
+                + this.getDataHoraAbertura() + ", "
+                + this.getDataHoraFechamento() + ", "
+                + this.getValorAbertura() + ", "
+                + this.getValorFechamento() + ", "
+                + this.getObservaccao() + ", "
                 + this.getStatus() + ", "
                 + this.funcionario.getUsuario();
 
+    }
+
+    public void setObservacao(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public String getObservacao() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
